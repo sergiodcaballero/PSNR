@@ -1,0 +1,58 @@
+---------------------------------------------------------------------------------------------------------------------------------
+| Date     | Time   |Action              |IDSOCIO       |MATRICULA     |NOMBRE                        |IDUSUARIO     |FECHA ALTA|
+---------------------------------------------------------------------------------------------------------------------------------
+|31/01/2017|11:57 a.|On Insert           |             0|             1|PP PP                         |             1|  /  /    |
+|31/01/2017|11:57 a.|On Insert           |             0|             1|PP PP                         |             1|  /  /    |
+|31/01/2017|12:00 p.|On Insert           |             0|            55|5 5                           |             1|  /  /    |
+|31/01/2017|12:01 p.|On Insert           |             0|             5|111 111                       |             1|  /  /    |
+|31/01/2017|12:01 p.|On Insert           |             0|             5|111 111                       |             1|  /  /    |
+|11/02/2017|15:37|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|15:37|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|15:37|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|15:37|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|15:37|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|15:37|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|15:38|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|15:38|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|16:07|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|16:07|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|11/02/2017|16:29|Before Change       |             8|            23|ASTORI MARIA ROSA             |             1|01/02/2017|
+|11/02/2017|16:29|After Change        |             8|            23|ASTORI MARIA ROSA             |             1|01/02/2017|
+|13/02/2017|17:20|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|13/02/2017|17:20|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|13/02/2017|18:07|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|13/02/2017|18:07|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|13/02/2017|18:08|Before Change       |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|13/02/2017|18:08|After Change        |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|13/02/2017|18:31|Before Change       |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|13/02/2017|18:31|After Change        |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|13/02/2017|18:31|Before Change       |             3|             3|GINESTET NESTOR HUGO          |             1|01/02/2017|
+|13/02/2017|18:31|After Change        |             3|             3|GINESTET NESTOR HUGO          |             1|01/02/2017|
+|13/02/2017|18:31|Before Change       |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|13/02/2017|18:31|After Change        |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|13/02/2017|18:31|Before Change       |             5|             5|GUYOT ANGELICA MARTA          |             1|01/02/2017|
+|13/02/2017|18:31|After Change        |             5|             5|GUYOT ANGELICA MARTA          |             1|01/02/2017|
+|13/02/2017|18:32|Before Change       |             4|             4|VIGAS CASILDA AURORA          |             1|01/02/2017|
+|13/02/2017|18:32|After Change        |             4|             4|VIGAS CASILDA AURORA          |             1|01/02/2017|
+|13/02/2017|18:33|Before Change       |             3|             3|GINESTET NESTOR HUGO          |             1|01/02/2017|
+|13/02/2017|18:33|After Change        |             3|             3|GINESTET NESTOR HUGO          |             1|01/02/2017|
+|13/02/2017|18:33|Before Change       |             4|             4|VIGAS CASILDA AURORA          |             1|01/02/2017|
+|13/02/2017|18:33|After Change        |             4|             4|VIGAS CASILDA AURORA          |             1|01/02/2017|
+|13/02/2017|18:35|Before Change       |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|13/02/2017|18:35|After Change        |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|13/02/2017|18:35|Before Change       |             3|             3|GINESTET NESTOR HUGO          |             1|01/02/2017|
+|13/02/2017|18:35|After Change        |             3|             3|GINESTET NESTOR HUGO          |             1|01/02/2017|
+|14/02/2017|20:40|Before Change       |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|14/02/2017|20:40|After Change        |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|01/01/2017|17:38|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|01/01/2017|17:38|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|  /  /    |
+|01/01/2017|17:38|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|  /  /    |
+|01/01/2017|17:38|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|01/01/2017|17:38|Before Change       |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|01/01/2017|17:38|After Change        |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|01/01/2017|17:38|Before Change       |             4|             4|VIGAS CASILDA AURORA          |             1|01/02/2017|
+|01/01/2017|17:38|After Change        |             4|             4|VIGAS CASILDA AURORA          |             1|01/02/1987|
+|03/03/2017|17:43|Before Change       |             1|             1|GUTIERREZ MARTA SUSANA        |             1|01/02/2017|
+|03/03/2017|17:43|After Change        |             1|             1|GUTIERREZ MARTA SUSANA        |             1|04/03/2012|
+|03/03/2017|17:43|Before Change       |             2|             2|MATEOS GRACIELA TERESA        |             1|01/02/2017|
+|03/03/2017|17:43|After Change        |             2|             2|MATEOS GRACIELA TERESA        |             1|02/03/2012|

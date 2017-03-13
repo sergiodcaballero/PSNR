@@ -1,0 +1,3 @@
+  MODULE('GESTION050.CLW')
+CUMPLE1                PROCEDURE
+  END

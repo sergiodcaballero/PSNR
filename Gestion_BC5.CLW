@@ -1,0 +1,1472 @@
+  MEMBER('Gestion.clw')
+
+  INCLUDE('ABFILE.INC'),ONCE
+
+  MAP
+Gestion_BC5:DctInit    PROCEDURE()
+Gestion_BC5:DctKill    PROCEDURE()
+Gestion_BC5:FilesInit  PROCEDURE()
+  END
+
+Hide:Access:PADRON_WEB_OS CLASS(FileManager),TYPE          ! FileManager for PADRON_WEB_OS
+Fetch                  PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Init                   PROCEDURE(),DERIVED
+Insert                 PROCEDURE(),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+SaveBuffer             PROCEDURE(),USHORT,DERIVED
+TryFetch               PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Update                 PROCEDURE(),BYTE,PROC,DERIVED
+UseFile                PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED
+                     END
+
+
+Hide:Relate:PADRON_WEB_OS CLASS(RelationManager),TYPE      ! RelationManager for PADRON_WEB_OS
+Init                   PROCEDURE
+Delete                 PROCEDURE(BYTE Query=1),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+Save                   PROCEDURE(),DERIVED
+Update                 PROCEDURE(BYTE FromForm=0),BYTE,PROC,DERIVED
+                     END
+
+Hide:Access:PADRON_WEB CLASS(FileManager),TYPE             ! FileManager for PADRON_WEB
+Fetch                  PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Init                   PROCEDURE(),DERIVED
+Insert                 PROCEDURE(),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+SaveBuffer             PROCEDURE(),USHORT,DERIVED
+TryFetch               PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Update                 PROCEDURE(),BYTE,PROC,DERIVED
+UseFile                PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED
+                     END
+
+
+Hide:Relate:PADRON_WEB CLASS(RelationManager),TYPE         ! RelationManager for PADRON_WEB
+Init                   PROCEDURE
+Delete                 PROCEDURE(BYTE Query=1),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+Save                   PROCEDURE(),DERIVED
+Update                 PROCEDURE(BYTE FromForm=0),BYTE,PROC,DERIVED
+                     END
+
+Hide:Access:SOCIOSAlias CLASS(FileManager),TYPE            ! FileManager for SOCIOSAlias
+Fetch                  PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Init                   PROCEDURE(),DERIVED
+Insert                 PROCEDURE(),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+SaveBuffer             PROCEDURE(),USHORT,DERIVED
+TryFetch               PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Update                 PROCEDURE(),BYTE,PROC,DERIVED
+UseFile                PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED
+                     END
+
+
+Hide:Relate:SOCIOSAlias CLASS(RelationManager),TYPE        ! RelationManager for SOCIOSAlias
+Init                   PROCEDURE
+DeferedAddRelations    PROCEDURE(),DERIVED
+Delete                 PROCEDURE(BYTE Query=1),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+Save                   PROCEDURE(),DERIVED
+Update                 PROCEDURE(BYTE FromForm=0),BYTE,PROC,DERIVED
+                     END
+
+Hide:Access:LIQUIDACIONAlias CLASS(FileManager),TYPE       ! FileManager for LIQUIDACIONAlias
+Fetch                  PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Init                   PROCEDURE(),DERIVED
+Insert                 PROCEDURE(),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+SaveBuffer             PROCEDURE(),USHORT,DERIVED
+TryFetch               PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Update                 PROCEDURE(),BYTE,PROC,DERIVED
+UseFile                PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED
+                     END
+
+
+Hide:Relate:LIQUIDACIONAlias CLASS(RelationManager),TYPE   ! RelationManager for LIQUIDACIONAlias
+Init                   PROCEDURE
+Delete                 PROCEDURE(BYTE Query=1),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+Save                   PROCEDURE(),DERIVED
+Update                 PROCEDURE(BYTE FromForm=0),BYTE,PROC,DERIVED
+                     END
+
+Hide:Access:PAGOS_LIQUIDACIONAlias CLASS(FileManager),TYPE ! FileManager for PAGOS_LIQUIDACIONAlias
+Fetch                  PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Init                   PROCEDURE(),DERIVED
+Insert                 PROCEDURE(),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+SaveBuffer             PROCEDURE(),USHORT,DERIVED
+TryFetch               PROCEDURE(KEY K),BYTE,PROC,DERIVED
+Update                 PROCEDURE(),BYTE,PROC,DERIVED
+UseFile                PROCEDURE(BYTE UseType = UseType:Uses),BYTE,PROC,DERIVED
+                     END
+
+
+Hide:Relate:PAGOS_LIQUIDACIONAlias CLASS(RelationManager),TYPE ! RelationManager for PAGOS_LIQUIDACIONAlias
+Init                   PROCEDURE
+Delete                 PROCEDURE(BYTE Query=1),BYTE,PROC,DERIVED
+Kill                   PROCEDURE(),DERIVED
+Save                   PROCEDURE(),DERIVED
+Update                 PROCEDURE(BYTE FromForm=0),BYTE,PROC,DERIVED
+                     END
+
+
+_Hide:Access:PADRON_WEB_OS &Hide:Access:PADRON_WEB_OS,AUTO,THREAD
+_Hide:Relate:PADRON_WEB_OS &Hide:Relate:PADRON_WEB_OS,AUTO,THREAD
+_Hide:Access:PADRON_WEB &Hide:Access:PADRON_WEB,AUTO,THREAD
+_Hide:Relate:PADRON_WEB &Hide:Relate:PADRON_WEB,AUTO,THREAD
+_Hide:Access:SOCIOSAlias &Hide:Access:SOCIOSAlias,AUTO,THREAD
+_Hide:Relate:SOCIOSAlias &Hide:Relate:SOCIOSAlias,AUTO,THREAD
+_Hide:Access:LIQUIDACIONAlias &Hide:Access:LIQUIDACIONAlias,AUTO,THREAD
+_Hide:Relate:LIQUIDACIONAlias &Hide:Relate:LIQUIDACIONAlias,AUTO,THREAD
+_Hide:Access:PAGOS_LIQUIDACIONAlias &Hide:Access:PAGOS_LIQUIDACIONAlias,AUTO,THREAD
+_Hide:Relate:PAGOS_LIQUIDACIONAlias &Hide:Relate:PAGOS_LIQUIDACIONAlias,AUTO,THREAD
+
+
+Gestion_BC5:DctInit PROCEDURE()
+  CODE
+  _Hide:Access:PADRON_WEB_OS &= NEW(Hide:Access:PADRON_WEB_OS)
+  _Hide:Relate:PADRON_WEB_OS &= NEW(Hide:Relate:PADRON_WEB_OS)
+  _Hide:Access:PADRON_WEB &= NEW(Hide:Access:PADRON_WEB)
+  _Hide:Relate:PADRON_WEB &= NEW(Hide:Relate:PADRON_WEB)
+  _Hide:Access:SOCIOSAlias &= NEW(Hide:Access:SOCIOSAlias)
+  _Hide:Relate:SOCIOSAlias &= NEW(Hide:Relate:SOCIOSAlias)
+  _Hide:Access:LIQUIDACIONAlias &= NEW(Hide:Access:LIQUIDACIONAlias)
+  _Hide:Relate:LIQUIDACIONAlias &= NEW(Hide:Relate:LIQUIDACIONAlias)
+  _Hide:Access:PAGOS_LIQUIDACIONAlias &= NEW(Hide:Access:PAGOS_LIQUIDACIONAlias)
+  _Hide:Relate:PAGOS_LIQUIDACIONAlias &= NEW(Hide:Relate:PAGOS_LIQUIDACIONAlias)
+  Relate:PADRON_WEB_OS &= _Hide:Relate:PADRON_WEB_OS
+  Relate:PADRON_WEB &= _Hide:Relate:PADRON_WEB
+  Relate:SOCIOSAlias &= _Hide:Relate:SOCIOSAlias
+  Relate:LIQUIDACIONAlias &= _Hide:Relate:LIQUIDACIONAlias
+  Relate:PAGOS_LIQUIDACIONAlias &= _Hide:Relate:PAGOS_LIQUIDACIONAlias
+
+
+Gestion_BC5:FilesInit PROCEDURE()
+  CODE
+  _Hide:Relate:PADRON_WEB_OS.Init
+  _Hide:Relate:PADRON_WEB.Init
+  _Hide:Relate:SOCIOSAlias.Init
+  _Hide:Relate:LIQUIDACIONAlias.Init
+  _Hide:Relate:PAGOS_LIQUIDACIONAlias.Init
+
+
+Gestion_BC5:DctKill PROCEDURE()
+  CODE
+  _Hide:Relate:PADRON_WEB_OS.Kill
+  DISPOSE(_Hide:Relate:PADRON_WEB_OS)
+  _Hide:Relate:PADRON_WEB.Kill
+  DISPOSE(_Hide:Relate:PADRON_WEB)
+  _Hide:Relate:SOCIOSAlias.Kill
+  DISPOSE(_Hide:Relate:SOCIOSAlias)
+  _Hide:Relate:LIQUIDACIONAlias.Kill
+  DISPOSE(_Hide:Relate:LIQUIDACIONAlias)
+  _Hide:Relate:PAGOS_LIQUIDACIONAlias.Kill
+  DISPOSE(_Hide:Relate:PAGOS_LIQUIDACIONAlias)
+
+
+Hide:Relate:PADRON_WEB_OS.Init PROCEDURE()
+  CODE
+  _Hide:Access:PADRON_WEB_OS.Init
+  SELF.Init(Access:PADRON_WEB_OS,1)
+
+
+Hide:Access:PADRON_WEB_OS.Fetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Fetch(K)
+   IF NOT DbChangeTrigger.SetThread('PADRON_WEB_OS')
+      DbChangeTrigger.AddThread('PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:OBRA_SOCIAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:OBRA_SOCIAL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:MATRICULA, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:MATRICULA)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:NOMBRE, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:NOMBRE)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:LOCALIDAD, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:LOCALIDAD)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:COD_TEL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:COD_TEL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:TELEFONO_LABORAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:TELEFONO_LABORAL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:DIRECCION_LABORAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:DIRECCION_LABORAL)) , 'PADRON_WEB_OS')
+   END
+   DbChangeTrigger.Update('PADRON_WEB_OS')
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB_OS.Init PROCEDURE
+
+  CODE
+  SELF.Initialized = False
+  SELF.Buffer &= PAD21:Record
+  SELF.FileNameValue = 'PADRON_WEB_OS'
+  SELF.SetErrors(GlobalErrors)
+  SELF.File &= PADRON_WEB_OS
+  PARENT.Init
+  Access:PADRON_WEB_OS &= SELF
+
+
+Hide:Access:PADRON_WEB_OS.Insert PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Insert()
+  DbAudit.OnInsert('PADRON_WEB_OS',PADRON_WEB_OS)
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB_OS.Kill PROCEDURE
+
+  CODE
+  PARENT.Kill
+  Access:PADRON_WEB_OS &= NULL                             ! File manager has been destroyed to assign null, it is an error to reference this after this point
+
+
+Hide:Access:PADRON_WEB_OS.SaveBuffer PROCEDURE
+
+ReturnValue          USHORT,AUTO
+
+  CODE
+  ReturnValue = PARENT.SaveBuffer()
+   IF NOT DbChangeTrigger.SetThread('PADRON_WEB_OS')
+      DbChangeTrigger.AddThread('PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:OBRA_SOCIAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:OBRA_SOCIAL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:MATRICULA, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:MATRICULA)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:NOMBRE, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:NOMBRE)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:LOCALIDAD, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:LOCALIDAD)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:COD_TEL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:COD_TEL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:TELEFONO_LABORAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:TELEFONO_LABORAL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:DIRECCION_LABORAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:DIRECCION_LABORAL)) , 'PADRON_WEB_OS')
+   END
+   DbChangeTrigger.Update('PADRON_WEB_OS')
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB_OS.TryFetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.TryFetch(K)
+   IF NOT DbChangeTrigger.SetThread('PADRON_WEB_OS')
+      DbChangeTrigger.AddThread('PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:OBRA_SOCIAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:OBRA_SOCIAL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:MATRICULA, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:MATRICULA)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:NOMBRE, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:NOMBRE)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:LOCALIDAD, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:LOCALIDAD)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:COD_TEL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:COD_TEL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:TELEFONO_LABORAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:TELEFONO_LABORAL)) , 'PADRON_WEB_OS')
+      DbChangeTrigger.AddItem(PAD21:DIRECCION_LABORAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:DIRECCION_LABORAL)) , 'PADRON_WEB_OS')
+   END
+   DbChangeTrigger.Update('PADRON_WEB_OS')
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB_OS.Update PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update()
+    IF NOT DbChangeTrigger.Equal('PADRON_WEB_OS')
+       DbChangeTrigger.CheckChanges('PADRON_WEB_OS',PADRON_WEB_OS) 
+    END
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB_OS.UseFile PROCEDURE(BYTE UseType = UseType:Uses)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  IF UseType ~= UseType:Initialize
+    SELF.UseFile(UseType:Initialize)                       !Recursive call to ensure initialization takes place
+  END
+  IF UseType = UseType:Initialize AND ~SELF.Initialized
+    SELF.InUseFile = True
+    SELF.Init(PADRON_WEB_OS,GlobalErrors)
+    SELF.Create = 1
+    SELF.LockRecover = 10
+  END
+                                                           !SELF.InUseFile will be set to False in PARENT
+  ReturnValue = PARENT.UseFile(UseType)
+  RETURN ReturnValue
+
+
+Hide:Relate:PADRON_WEB_OS.Delete PROCEDURE(BYTE Query=1)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Delete(Query)
+  DbAudit.OnDelete('PADRON_WEB_OS',PADRON_WEB_OS)
+  RETURN ReturnValue
+
+
+Hide:Relate:PADRON_WEB_OS.Kill PROCEDURE
+
+  CODE
+  _Hide:Access:PADRON_WEB_OS.Kill                          ! Kill the file manager
+  PARENT.Kill
+  Relate:PADRON_WEB_OS &= NULL                             ! Assign NULL to the RelationManager's FileManager reference, it is an error to reference this after this point
+  DISPOSE(_Hide:Access:PADRON_WEB_OS)                      ! destroy the file manager
+
+
+Hide:Relate:PADRON_WEB_OS.Save PROCEDURE
+
+  CODE
+  PARENT.Save
+    IF NOT DbChangeTrigger.SetThread('PADRON_WEB_OS')
+       DbChangeTrigger.AddThread('PADRON_WEB_OS')
+       DbChangeTrigger.AddItem(PAD21:OBRA_SOCIAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:OBRA_SOCIAL)) , 'PADRON_WEB_OS')
+       DbChangeTrigger.AddItem(PAD21:MATRICULA, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:MATRICULA)) , 'PADRON_WEB_OS')
+       DbChangeTrigger.AddItem(PAD21:NOMBRE, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:NOMBRE)) , 'PADRON_WEB_OS')
+       DbChangeTrigger.AddItem(PAD21:LOCALIDAD, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:LOCALIDAD)) , 'PADRON_WEB_OS')
+       DbChangeTrigger.AddItem(PAD21:COD_TEL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:COD_TEL)) , 'PADRON_WEB_OS')
+       DbChangeTrigger.AddItem(PAD21:TELEFONO_LABORAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:TELEFONO_LABORAL)) , 'PADRON_WEB_OS')
+       DbChangeTrigger.AddItem(PAD21:DIRECCION_LABORAL, WHO(PAD21:RECORD,WHERE(PAD21:RECORD,PAD21:DIRECCION_LABORAL)) , 'PADRON_WEB_OS')
+    END
+    DbChangeTrigger.Update('PADRON_WEB_OS')
+
+
+Hide:Relate:PADRON_WEB_OS.Update PROCEDURE(BYTE FromForm=0)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update(FromForm)
+     IF NOT DbChangeTrigger.Equal('PADRON_WEB_OS')
+        DbChangeTrigger.CheckChanges('PADRON_WEB_OS',PADRON_WEB_OS) 
+     END
+  RETURN ReturnValue
+
+
+Hide:Relate:PADRON_WEB.Init PROCEDURE()
+  CODE
+  _Hide:Access:PADRON_WEB.Init
+  SELF.Init(Access:PADRON_WEB,1)
+
+
+Hide:Access:PADRON_WEB.Fetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Fetch(K)
+   IF NOT DbChangeTrigger.SetThread('PADRON_WEB')
+      DbChangeTrigger.AddThread('PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:MATRICULA, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:MATRICULA)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:NOMBRE, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:NOMBRE)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:LOCALIDAD, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:LOCALIDAD)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:COD_TEL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:COD_TEL)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:TELEFONO_LABORAL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:TELEFONO_LABORAL)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:DIRECCION_LABORAL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:DIRECCION_LABORAL)) , 'PADRON_WEB')
+   END
+   DbChangeTrigger.Update('PADRON_WEB')
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB.Init PROCEDURE
+
+  CODE
+  SELF.Initialized = False
+  SELF.Buffer &= PAD2:Record
+  SELF.FileNameValue = 'PADRON_WEB'
+  SELF.SetErrors(GlobalErrors)
+  SELF.File &= PADRON_WEB
+  PARENT.Init
+  Access:PADRON_WEB &= SELF
+
+
+Hide:Access:PADRON_WEB.Insert PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Insert()
+  DbAudit.OnInsert('PADRON_WEB',PADRON_WEB)
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB.Kill PROCEDURE
+
+  CODE
+  PARENT.Kill
+  Access:PADRON_WEB &= NULL                                ! File manager has been destroyed to assign null, it is an error to reference this after this point
+
+
+Hide:Access:PADRON_WEB.SaveBuffer PROCEDURE
+
+ReturnValue          USHORT,AUTO
+
+  CODE
+  ReturnValue = PARENT.SaveBuffer()
+   IF NOT DbChangeTrigger.SetThread('PADRON_WEB')
+      DbChangeTrigger.AddThread('PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:MATRICULA, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:MATRICULA)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:NOMBRE, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:NOMBRE)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:LOCALIDAD, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:LOCALIDAD)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:COD_TEL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:COD_TEL)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:TELEFONO_LABORAL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:TELEFONO_LABORAL)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:DIRECCION_LABORAL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:DIRECCION_LABORAL)) , 'PADRON_WEB')
+   END
+   DbChangeTrigger.Update('PADRON_WEB')
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB.TryFetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.TryFetch(K)
+   IF NOT DbChangeTrigger.SetThread('PADRON_WEB')
+      DbChangeTrigger.AddThread('PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:MATRICULA, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:MATRICULA)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:NOMBRE, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:NOMBRE)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:LOCALIDAD, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:LOCALIDAD)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:COD_TEL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:COD_TEL)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:TELEFONO_LABORAL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:TELEFONO_LABORAL)) , 'PADRON_WEB')
+      DbChangeTrigger.AddItem(PAD2:DIRECCION_LABORAL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:DIRECCION_LABORAL)) , 'PADRON_WEB')
+   END
+   DbChangeTrigger.Update('PADRON_WEB')
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB.Update PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update()
+    IF NOT DbChangeTrigger.Equal('PADRON_WEB')
+       DbChangeTrigger.CheckChanges('PADRON_WEB',PADRON_WEB) 
+    END
+  RETURN ReturnValue
+
+
+Hide:Access:PADRON_WEB.UseFile PROCEDURE(BYTE UseType = UseType:Uses)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  IF UseType ~= UseType:Initialize
+    SELF.UseFile(UseType:Initialize)                       !Recursive call to ensure initialization takes place
+  END
+  IF UseType = UseType:Initialize AND ~SELF.Initialized
+    SELF.InUseFile = True
+    SELF.Init(PADRON_WEB,GlobalErrors)
+    SELF.Create = 1
+    SELF.LockRecover = 10
+  END
+                                                           !SELF.InUseFile will be set to False in PARENT
+  ReturnValue = PARENT.UseFile(UseType)
+  RETURN ReturnValue
+
+
+Hide:Relate:PADRON_WEB.Delete PROCEDURE(BYTE Query=1)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Delete(Query)
+  DbAudit.OnDelete('PADRON_WEB',PADRON_WEB)
+  RETURN ReturnValue
+
+
+Hide:Relate:PADRON_WEB.Kill PROCEDURE
+
+  CODE
+  _Hide:Access:PADRON_WEB.Kill                             ! Kill the file manager
+  PARENT.Kill
+  Relate:PADRON_WEB &= NULL                                ! Assign NULL to the RelationManager's FileManager reference, it is an error to reference this after this point
+  DISPOSE(_Hide:Access:PADRON_WEB)                         ! destroy the file manager
+
+
+Hide:Relate:PADRON_WEB.Save PROCEDURE
+
+  CODE
+  PARENT.Save
+    IF NOT DbChangeTrigger.SetThread('PADRON_WEB')
+       DbChangeTrigger.AddThread('PADRON_WEB')
+       DbChangeTrigger.AddItem(PAD2:MATRICULA, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:MATRICULA)) , 'PADRON_WEB')
+       DbChangeTrigger.AddItem(PAD2:NOMBRE, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:NOMBRE)) , 'PADRON_WEB')
+       DbChangeTrigger.AddItem(PAD2:LOCALIDAD, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:LOCALIDAD)) , 'PADRON_WEB')
+       DbChangeTrigger.AddItem(PAD2:COD_TEL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:COD_TEL)) , 'PADRON_WEB')
+       DbChangeTrigger.AddItem(PAD2:TELEFONO_LABORAL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:TELEFONO_LABORAL)) , 'PADRON_WEB')
+       DbChangeTrigger.AddItem(PAD2:DIRECCION_LABORAL, WHO(PAD2:RECORD,WHERE(PAD2:RECORD,PAD2:DIRECCION_LABORAL)) , 'PADRON_WEB')
+    END
+    DbChangeTrigger.Update('PADRON_WEB')
+
+
+Hide:Relate:PADRON_WEB.Update PROCEDURE(BYTE FromForm=0)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update(FromForm)
+     IF NOT DbChangeTrigger.Equal('PADRON_WEB')
+        DbChangeTrigger.CheckChanges('PADRON_WEB',PADRON_WEB) 
+     END
+  RETURN ReturnValue
+
+
+Hide:Relate:SOCIOSAlias.Init PROCEDURE()
+  CODE
+  _Hide:Access:SOCIOSAlias.Init
+  SELF.Init(Access:SOCIOSAlias,1)
+  SELF.SetAlias(Relate:SOCIOS)
+
+
+Hide:Access:SOCIOSAlias.Fetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Fetch(K)
+   IF NOT DbChangeTrigger.SetThread('SOCIOSAlias')
+      DbChangeTrigger.AddThread('SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDSOCIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDSOCIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:MATRICULA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:MATRICULA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDZONA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDZONA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCOBERTURA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCOBERTURA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDLOCALIDAD, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDLOCALIDAD)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDUSUARIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDUSUARIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NOMBRE, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NOMBRE)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:N_DOCUMENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:N_DOCUMENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DIRECCION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DIRECCION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:EMAIL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:EMAIL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_NACIMIENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_NACIMIENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NRO_VIEJO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NRO_VIEJO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BENEF, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BENEF)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_BAJA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_BAJA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OBSERVACION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OBSERVACION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDVENDEDOR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDVENDEDOR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:INGRESO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:INGRESO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DESCUENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DESCUENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:MES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:MES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ANO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ANO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:PERIODO_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:PERIODO_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:SEXO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:SEXO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CANTIDAD, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CANTIDAD)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:HORA_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:HORA_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TELEFONO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TELEFONO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DIRECCION_LABORAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DIRECCION_LABORAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TELEFONO_LABORAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TELEFONO_LABORAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FIN_COBERTURA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FIN_COBERTURA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BAJA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BAJA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ID_TIPO_DOC, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ID_TIPO_DOC)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCIRCULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCIRCULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LIBRO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LIBRO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FOLIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FOLIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ACTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ACTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:PROVISORIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:PROVISORIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDINSTITUCION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDINSTITUCION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_EGRESO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_EGRESO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BAJA_TEMPORARIA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BAJA_TEMPORARIA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OTRAS_MATRICULAS, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OTRAS_MATRICULAS)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OTRAS_CERTIFICACIONES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OTRAS_CERTIFICACIONES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_TITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_TITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LUGAR_NACIMIENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LUGAR_NACIMIENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CELULAR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CELULAR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDTIPOTITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDTIPOTITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDMINISTERIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDMINISTERIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCS, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCS)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LUGAR_TRABAJO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LUGAR_TRABAJO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TIPO_TITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TIPO_TITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDPROVEEDOR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDPROVEEDOR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TIPOIVA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TIPOIVA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CUIT, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CUIT)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDBANCO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDBANCO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CBU, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CBU)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ANSSAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ANSSAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_ALTA_MIN, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_ALTA_MIN)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:APELLIDO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:APELLIDO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NOMBRES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NOMBRES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CUMPLE, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CUMPLE)) , 'SOCIOSAlias')
+   END
+   DbChangeTrigger.Update('SOCIOSAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:SOCIOSAlias.Init PROCEDURE
+
+  CODE
+  SELF.Initialized = False
+  SELF.Buffer &= SOC1:Record
+  SELF.AliasedFile &= Access:SOCIOS                        !This is a File Alias, so assign aliased file manager
+  SELF.FileNameValue = 'SOCIOSAlias'
+  SELF.SetErrors(GlobalErrors)
+  SELF.File &= SOCIOSAlias
+  PARENT.Init
+  Access:SOCIOSAlias &= SELF
+
+
+Hide:Access:SOCIOSAlias.Insert PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Insert()
+  DbAudit.OnInsert('SOCIOSAlias',SOCIOSAlias)
+  RETURN ReturnValue
+
+
+Hide:Access:SOCIOSAlias.Kill PROCEDURE
+
+  CODE
+  PARENT.Kill
+  Access:SOCIOSAlias &= NULL                               ! File manager has been destroyed to assign null, it is an error to reference this after this point
+
+
+Hide:Access:SOCIOSAlias.SaveBuffer PROCEDURE
+
+ReturnValue          USHORT,AUTO
+
+  CODE
+  ReturnValue = PARENT.SaveBuffer()
+   IF NOT DbChangeTrigger.SetThread('SOCIOSAlias')
+      DbChangeTrigger.AddThread('SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDSOCIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDSOCIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:MATRICULA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:MATRICULA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDZONA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDZONA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCOBERTURA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCOBERTURA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDLOCALIDAD, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDLOCALIDAD)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDUSUARIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDUSUARIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NOMBRE, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NOMBRE)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:N_DOCUMENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:N_DOCUMENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DIRECCION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DIRECCION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:EMAIL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:EMAIL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_NACIMIENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_NACIMIENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NRO_VIEJO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NRO_VIEJO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BENEF, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BENEF)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_BAJA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_BAJA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OBSERVACION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OBSERVACION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDVENDEDOR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDVENDEDOR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:INGRESO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:INGRESO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DESCUENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DESCUENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:MES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:MES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ANO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ANO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:PERIODO_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:PERIODO_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:SEXO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:SEXO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CANTIDAD, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CANTIDAD)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:HORA_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:HORA_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TELEFONO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TELEFONO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DIRECCION_LABORAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DIRECCION_LABORAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TELEFONO_LABORAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TELEFONO_LABORAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FIN_COBERTURA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FIN_COBERTURA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BAJA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BAJA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ID_TIPO_DOC, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ID_TIPO_DOC)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCIRCULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCIRCULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LIBRO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LIBRO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FOLIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FOLIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ACTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ACTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:PROVISORIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:PROVISORIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDINSTITUCION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDINSTITUCION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_EGRESO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_EGRESO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BAJA_TEMPORARIA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BAJA_TEMPORARIA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OTRAS_MATRICULAS, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OTRAS_MATRICULAS)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OTRAS_CERTIFICACIONES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OTRAS_CERTIFICACIONES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_TITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_TITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LUGAR_NACIMIENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LUGAR_NACIMIENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CELULAR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CELULAR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDTIPOTITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDTIPOTITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDMINISTERIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDMINISTERIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCS, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCS)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LUGAR_TRABAJO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LUGAR_TRABAJO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TIPO_TITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TIPO_TITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDPROVEEDOR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDPROVEEDOR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TIPOIVA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TIPOIVA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CUIT, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CUIT)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDBANCO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDBANCO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CBU, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CBU)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ANSSAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ANSSAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_ALTA_MIN, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_ALTA_MIN)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:APELLIDO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:APELLIDO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NOMBRES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NOMBRES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CUMPLE, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CUMPLE)) , 'SOCIOSAlias')
+   END
+   DbChangeTrigger.Update('SOCIOSAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:SOCIOSAlias.TryFetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.TryFetch(K)
+   IF NOT DbChangeTrigger.SetThread('SOCIOSAlias')
+      DbChangeTrigger.AddThread('SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDSOCIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDSOCIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:MATRICULA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:MATRICULA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDZONA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDZONA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCOBERTURA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCOBERTURA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDLOCALIDAD, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDLOCALIDAD)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDUSUARIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDUSUARIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NOMBRE, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NOMBRE)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:N_DOCUMENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:N_DOCUMENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DIRECCION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DIRECCION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:EMAIL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:EMAIL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_NACIMIENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_NACIMIENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NRO_VIEJO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NRO_VIEJO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BENEF, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BENEF)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_BAJA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_BAJA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OBSERVACION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OBSERVACION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDVENDEDOR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDVENDEDOR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:INGRESO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:INGRESO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DESCUENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DESCUENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:MES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:MES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ANO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ANO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:PERIODO_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:PERIODO_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:SEXO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:SEXO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CANTIDAD, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CANTIDAD)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:HORA_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:HORA_ALTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TELEFONO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TELEFONO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:DIRECCION_LABORAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DIRECCION_LABORAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TELEFONO_LABORAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TELEFONO_LABORAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FIN_COBERTURA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FIN_COBERTURA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BAJA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BAJA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ID_TIPO_DOC, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ID_TIPO_DOC)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCIRCULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCIRCULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LIBRO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LIBRO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FOLIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FOLIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ACTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ACTA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:PROVISORIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:PROVISORIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDINSTITUCION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDINSTITUCION)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_EGRESO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_EGRESO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:BAJA_TEMPORARIA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BAJA_TEMPORARIA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OTRAS_MATRICULAS, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OTRAS_MATRICULAS)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:OTRAS_CERTIFICACIONES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OTRAS_CERTIFICACIONES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_TITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_TITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LUGAR_NACIMIENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LUGAR_NACIMIENTO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CELULAR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CELULAR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDTIPOTITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDTIPOTITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDMINISTERIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDMINISTERIO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDCS, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCS)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:LUGAR_TRABAJO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LUGAR_TRABAJO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TIPO_TITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TIPO_TITULO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDPROVEEDOR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDPROVEEDOR)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:TIPOIVA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TIPOIVA)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CUIT, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CUIT)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:IDBANCO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDBANCO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CBU, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CBU)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:ANSSAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ANSSAL)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:FECHA_ALTA_MIN, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_ALTA_MIN)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:APELLIDO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:APELLIDO)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:NOMBRES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NOMBRES)) , 'SOCIOSAlias')
+      DbChangeTrigger.AddItem(SOC1:CUMPLE, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CUMPLE)) , 'SOCIOSAlias')
+   END
+   DbChangeTrigger.Update('SOCIOSAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:SOCIOSAlias.Update PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update()
+    IF NOT DbChangeTrigger.Equal('SOCIOSAlias')
+       DbChangeTrigger.CheckChanges('SOCIOSAlias',SOCIOSAlias) 
+    END
+  RETURN ReturnValue
+
+
+Hide:Access:SOCIOSAlias.UseFile PROCEDURE(BYTE UseType = UseType:Uses)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  IF UseType ~= UseType:Initialize
+    SELF.UseFile(UseType:Initialize)                       !Recursive call to ensure initialization takes place
+  END
+  IF UseType = UseType:Initialize AND ~SELF.Initialized
+    SELF.InUseFile = True
+    SELF.Init(SOCIOSAlias,GlobalErrors)
+    SELF.Create = 0
+    SELF.LockRecover = 10
+    SELF.AddKey(SOC1:PK_SOCIOS,'SOC1:PK_SOCIOS',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_DOCUMENTO,'SOC1:IDX_SOCIOS_DOCUMENTO',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_MATRICULA,'SOC1:IDX_SOCIOS_MATRICULA',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_CIRCULO,'SOC1:FK_SOCIOS_CIRCULO',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_COBERTURA,'SOC1:FK_SOCIOS_COBERTURA',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_INSTITUCION,'SOC1:FK_SOCIOS_INSTITUCION',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_LOCALIDAD,'SOC1:FK_SOCIOS_LOCALIDAD',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_TIPO_DOC,'SOC1:FK_SOCIOS_TIPO_DOC',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_USUARIO,'SOC1:FK_SOCIOS_USUARIO',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_ZONA_VIVENDA,'SOC1:FK_SOCIOS_ZONA_VIVENDA',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_ACTA,'SOC1:IDX_SOCIOS_ACTA',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_BAJA,'SOC1:IDX_SOCIOS_BAJA',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_LIBRO,'SOC1:IDX_SOCIOS_LIBRO',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_NOMBRE,'SOC1:IDX_SOCIOS_NOMBRE',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_N_VIEJO,'SOC1:IDX_SOCIOS_N_VIEJO',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_PROVISORIO,'SOC1:IDX_SOCIOS_PROVISORIO',0)
+    SELF.AddKey(SOC1:IDX_SOCIO_INGRESO,'SOC1:IDX_SOCIO_INGRESO',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_TIPO_TITULO,'SOC1:FK_SOCIOS_TIPO_TITULO',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_MINISTERIO,'SOC1:IDX_SOCIOS_MINISTERIO',0)
+    SELF.AddKey(SOC1:SOCIOS_CENTRO_SALUD,'SOC1:SOCIOS_CENTRO_SALUD',0)
+    SELF.AddKey(SOC1:IDX_SOCIOS_PROVEEDOR,'SOC1:IDX_SOCIOS_PROVEEDOR',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_TIPO_IVA,'SOC1:FK_SOCIOS_TIPO_IVA',0)
+    SELF.AddKey(SOC1:FK_SOCIOS_BANCO,'SOC1:FK_SOCIOS_BANCO',0)
+  END
+                                                           !SELF.InUseFile will be set to False in PARENT
+  ReturnValue = PARENT.UseFile(UseType)
+  RETURN ReturnValue
+
+
+Hide:Relate:SOCIOSAlias.DeferedAddRelations PROCEDURE
+
+  CODE
+  DO AddRelations_1
+  
+  PARENT.DeferedAddRelations
+
+AddRelations_1 ROUTINE
+  SELF.AddRelation(Relate:CONSULTRIO_ADHERENTE,RI:None,RI:None,CON1:FK_CONSULTRIO_ADHERENTE_SOCIO)
+  SELF.AddRelationLink(SOC1:IDSOCIO,CON1:IDSOCIO)
+
+
+Hide:Relate:SOCIOSAlias.Delete PROCEDURE(BYTE Query=1)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Delete(Query)
+  DbAudit.OnDelete('SOCIOSAlias',SOCIOSAlias)
+  RETURN ReturnValue
+
+
+Hide:Relate:SOCIOSAlias.Kill PROCEDURE
+
+  CODE
+  _Hide:Access:SOCIOSAlias.Kill                            ! Kill the file manager
+  PARENT.Kill
+  Relate:SOCIOSAlias &= NULL                               ! Assign NULL to the RelationManager's FileManager reference, it is an error to reference this after this point
+  DISPOSE(_Hide:Access:SOCIOSAlias)                        ! destroy the file manager
+
+
+Hide:Relate:SOCIOSAlias.Save PROCEDURE
+
+  CODE
+  PARENT.Save
+    IF NOT DbChangeTrigger.SetThread('SOCIOSAlias')
+       DbChangeTrigger.AddThread('SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDSOCIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDSOCIO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:MATRICULA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:MATRICULA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDZONA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDZONA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDCOBERTURA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCOBERTURA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDLOCALIDAD, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDLOCALIDAD)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDUSUARIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDUSUARIO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:NOMBRE, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NOMBRE)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:N_DOCUMENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:N_DOCUMENTO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:DIRECCION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DIRECCION)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:FECHA_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_ALTA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:EMAIL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:EMAIL)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:FECHA_NACIMIENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_NACIMIENTO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:NRO_VIEJO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NRO_VIEJO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:BENEF, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BENEF)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:FECHA_BAJA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_BAJA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:OBSERVACION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OBSERVACION)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDVENDEDOR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDVENDEDOR)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:INGRESO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:INGRESO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:DESCUENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DESCUENTO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:MES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:MES)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:ANO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ANO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:PERIODO_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:PERIODO_ALTA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:SEXO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:SEXO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:CANTIDAD, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CANTIDAD)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:HORA_ALTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:HORA_ALTA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:TELEFONO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TELEFONO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:DIRECCION_LABORAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:DIRECCION_LABORAL)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:TELEFONO_LABORAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TELEFONO_LABORAL)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:FIN_COBERTURA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FIN_COBERTURA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:BAJA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BAJA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:ID_TIPO_DOC, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ID_TIPO_DOC)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDCIRCULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCIRCULO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:LIBRO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LIBRO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:FOLIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FOLIO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:ACTA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ACTA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:PROVISORIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:PROVISORIO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDINSTITUCION, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDINSTITUCION)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:FECHA_EGRESO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_EGRESO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:BAJA_TEMPORARIA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:BAJA_TEMPORARIA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:OTRAS_MATRICULAS, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OTRAS_MATRICULAS)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:OTRAS_CERTIFICACIONES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:OTRAS_CERTIFICACIONES)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:FECHA_TITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_TITULO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:LUGAR_NACIMIENTO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LUGAR_NACIMIENTO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:CELULAR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CELULAR)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDTIPOTITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDTIPOTITULO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDMINISTERIO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDMINISTERIO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDCS, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDCS)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:LUGAR_TRABAJO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:LUGAR_TRABAJO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:TIPO_TITULO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TIPO_TITULO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDPROVEEDOR, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDPROVEEDOR)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:TIPOIVA, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:TIPOIVA)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:CUIT, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CUIT)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:IDBANCO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:IDBANCO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:CBU, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CBU)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:ANSSAL, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:ANSSAL)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:FECHA_ALTA_MIN, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:FECHA_ALTA_MIN)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:APELLIDO, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:APELLIDO)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:NOMBRES, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:NOMBRES)) , 'SOCIOSAlias')
+       DbChangeTrigger.AddItem(SOC1:CUMPLE, WHO(SOC1:RECORD,WHERE(SOC1:RECORD,SOC1:CUMPLE)) , 'SOCIOSAlias')
+    END
+    DbChangeTrigger.Update('SOCIOSAlias')
+
+
+Hide:Relate:SOCIOSAlias.Update PROCEDURE(BYTE FromForm=0)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update(FromForm)
+     IF NOT DbChangeTrigger.Equal('SOCIOSAlias')
+        DbChangeTrigger.CheckChanges('SOCIOSAlias',SOCIOSAlias) 
+     END
+  RETURN ReturnValue
+
+
+Hide:Relate:LIQUIDACIONAlias.Init PROCEDURE()
+  CODE
+  _Hide:Access:LIQUIDACIONAlias.Init
+  SELF.Init(Access:LIQUIDACIONAlias,1)
+  SELF.SetAlias(Relate:LIQUIDACION)
+
+
+Hide:Access:LIQUIDACIONAlias.Fetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Fetch(K)
+   IF NOT DbChangeTrigger.SetThread('LIQUIDACIONAlias')
+      DbChangeTrigger.AddThread('LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDLIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDLIQUIDACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDSOCIO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDSOCIO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDOS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDOS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MES, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MES)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:ANO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:ANO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PERIODO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PERIODO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:TIPO_PERIODO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:TIPO_PERIODO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_CARGA, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_CARGA)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_PRESENTACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_PRESENTACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_COBRO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_COBRO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO_PAGADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO_PAGADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDFORMA_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDFORMA_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:COMISION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:COMISION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:CANTIDAD, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:CANTIDAD)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO_COMISION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO_COMISION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:CANTIDAD_CUOTAS_PAGADAS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:CANTIDAD_CUOTAS_PAGADAS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO_PAGO_CUOTAS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO_PAGO_CUOTAS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO_TOTAL, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO_TOTAL)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PRESENTADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PRESENTADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:COBRADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:COBRADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PAGADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PAGADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDUSUARIO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDUSUARIO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:USUARIO_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:USUARIO_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDPAGO_LIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDPAGO_LIQUIDACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:SOCIOS_LIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:SOCIOS_LIQUIDACION)) , 'LIQUIDACIONAlias')
+   END
+   DbChangeTrigger.Update('LIQUIDACIONAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:LIQUIDACIONAlias.Init PROCEDURE
+
+  CODE
+  SELF.Initialized = False
+  SELF.Buffer &= LIQ1:Record
+  SELF.AliasedFile &= Access:LIQUIDACION                   !This is a File Alias, so assign aliased file manager
+  SELF.FileNameValue = 'LIQUIDACIONAlias'
+  SELF.SetErrors(GlobalErrors)
+  SELF.File &= LIQUIDACIONAlias
+  PARENT.Init
+  Access:LIQUIDACIONAlias &= SELF
+
+
+Hide:Access:LIQUIDACIONAlias.Insert PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Insert()
+  DbAudit.OnInsert('LIQUIDACIONAlias',LIQUIDACIONAlias)
+  RETURN ReturnValue
+
+
+Hide:Access:LIQUIDACIONAlias.Kill PROCEDURE
+
+  CODE
+  PARENT.Kill
+  Access:LIQUIDACIONAlias &= NULL                          ! File manager has been destroyed to assign null, it is an error to reference this after this point
+
+
+Hide:Access:LIQUIDACIONAlias.SaveBuffer PROCEDURE
+
+ReturnValue          USHORT,AUTO
+
+  CODE
+  ReturnValue = PARENT.SaveBuffer()
+   IF NOT DbChangeTrigger.SetThread('LIQUIDACIONAlias')
+      DbChangeTrigger.AddThread('LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDLIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDLIQUIDACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDSOCIO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDSOCIO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDOS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDOS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MES, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MES)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:ANO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:ANO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PERIODO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PERIODO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:TIPO_PERIODO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:TIPO_PERIODO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_CARGA, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_CARGA)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_PRESENTACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_PRESENTACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_COBRO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_COBRO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO_PAGADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO_PAGADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDFORMA_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDFORMA_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:COMISION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:COMISION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:CANTIDAD, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:CANTIDAD)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO_COMISION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO_COMISION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:CANTIDAD_CUOTAS_PAGADAS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:CANTIDAD_CUOTAS_PAGADAS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO_PAGO_CUOTAS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO_PAGO_CUOTAS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO_TOTAL, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO_TOTAL)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PRESENTADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PRESENTADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:COBRADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:COBRADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PAGADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PAGADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDUSUARIO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDUSUARIO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:USUARIO_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:USUARIO_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDPAGO_LIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDPAGO_LIQUIDACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:SOCIOS_LIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:SOCIOS_LIQUIDACION)) , 'LIQUIDACIONAlias')
+   END
+   DbChangeTrigger.Update('LIQUIDACIONAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:LIQUIDACIONAlias.TryFetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.TryFetch(K)
+   IF NOT DbChangeTrigger.SetThread('LIQUIDACIONAlias')
+      DbChangeTrigger.AddThread('LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDLIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDLIQUIDACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDSOCIO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDSOCIO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDOS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDOS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MES, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MES)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:ANO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:ANO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PERIODO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PERIODO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:TIPO_PERIODO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:TIPO_PERIODO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_CARGA, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_CARGA)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_PRESENTACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_PRESENTACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_COBRO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_COBRO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:FECHA_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO_PAGADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO_PAGADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDFORMA_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDFORMA_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:COMISION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:COMISION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:CANTIDAD, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:CANTIDAD)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO_COMISION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO_COMISION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:CANTIDAD_CUOTAS_PAGADAS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:CANTIDAD_CUOTAS_PAGADAS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:DEBITO_PAGO_CUOTAS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO_PAGO_CUOTAS)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:MONTO_TOTAL, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO_TOTAL)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PRESENTADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PRESENTADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:COBRADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:COBRADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:PAGADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PAGADO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDUSUARIO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDUSUARIO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:USUARIO_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:USUARIO_PAGO)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:IDPAGO_LIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDPAGO_LIQUIDACION)) , 'LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(LIQ1:SOCIOS_LIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:SOCIOS_LIQUIDACION)) , 'LIQUIDACIONAlias')
+   END
+   DbChangeTrigger.Update('LIQUIDACIONAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:LIQUIDACIONAlias.Update PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update()
+    IF NOT DbChangeTrigger.Equal('LIQUIDACIONAlias')
+       DbChangeTrigger.CheckChanges('LIQUIDACIONAlias',LIQUIDACIONAlias) 
+    END
+  RETURN ReturnValue
+
+
+Hide:Access:LIQUIDACIONAlias.UseFile PROCEDURE(BYTE UseType = UseType:Uses)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  IF UseType ~= UseType:Initialize
+    SELF.UseFile(UseType:Initialize)                       !Recursive call to ensure initialization takes place
+  END
+  IF UseType = UseType:Initialize AND ~SELF.Initialized
+    SELF.InUseFile = True
+    SELF.Init(LIQUIDACIONAlias,GlobalErrors)
+    SELF.Create = 0
+    SELF.LockRecover = 10
+    SELF.AddKey(LIQ1:PK_LIQUIDACION,'LIQ1:PK_LIQUIDACION',1)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_ANO,'LIQ1:IDX_LIQUIDACION_ANO',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_FECHA_CARGA,'LIQ1:IDX_LIQUIDACION_FECHA_CARGA',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_FECHA_PAGO,'LIQ1:IDX_LIQUIDACION_FECHA_PAGO',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_FECHA_PRESENTAC,'LIQ1:IDX_LIQUIDACION_FECHA_PRESENTAC',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_MES,'LIQ1:IDX_LIQUIDACION_MES',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_PERIODO,'LIQ1:IDX_LIQUIDACION_PERIODO',0)
+    SELF.AddKey(LIQ1:FK_LIQUIDACION_FORMA_PAGO,'LIQ1:FK_LIQUIDACION_FORMA_PAGO',0)
+    SELF.AddKey(LIQ1:FK_LIQUIDACION_OS,'LIQ1:FK_LIQUIDACION_OS',0)
+    SELF.AddKey(LIQ1:FK_LIQUIDACION_SOCIO,'LIQ1:FK_LIQUIDACION_SOCIO',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_UNIQUE,'LIQ1:IDX_LIQUIDACION_UNIQUE',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_PRESENTADO,'LIQ1:IDX_LIQUIDACION_PRESENTADO',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_COBRADO,'LIQ1:IDX_LIQUIDACION_COBRADO',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_PAGADO,'LIQ1:IDX_LIQUIDACION_PAGADO',0)
+    SELF.AddKey(LIQ1:FK_USUARIO,'LIQ1:FK_USUARIO',0)
+    SELF.AddKey(LIQ1:IDX_LIQUIDACION_PAGO,'LIQ1:IDX_LIQUIDACION_PAGO',0)
+  END
+                                                           !SELF.InUseFile will be set to False in PARENT
+  ReturnValue = PARENT.UseFile(UseType)
+  RETURN ReturnValue
+
+
+Hide:Relate:LIQUIDACIONAlias.Delete PROCEDURE(BYTE Query=1)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Delete(Query)
+  DbAudit.OnDelete('LIQUIDACIONAlias',LIQUIDACIONAlias)
+  RETURN ReturnValue
+
+
+Hide:Relate:LIQUIDACIONAlias.Kill PROCEDURE
+
+  CODE
+  _Hide:Access:LIQUIDACIONAlias.Kill                       ! Kill the file manager
+  PARENT.Kill
+  Relate:LIQUIDACIONAlias &= NULL                          ! Assign NULL to the RelationManager's FileManager reference, it is an error to reference this after this point
+  DISPOSE(_Hide:Access:LIQUIDACIONAlias)                   ! destroy the file manager
+
+
+Hide:Relate:LIQUIDACIONAlias.Save PROCEDURE
+
+  CODE
+  PARENT.Save
+    IF NOT DbChangeTrigger.SetThread('LIQUIDACIONAlias')
+       DbChangeTrigger.AddThread('LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:IDLIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDLIQUIDACION)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:IDSOCIO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDSOCIO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:IDOS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDOS)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:MES, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MES)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:ANO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:ANO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:PERIODO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PERIODO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:TIPO_PERIODO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:TIPO_PERIODO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:MONTO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:FECHA_CARGA, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_CARGA)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:FECHA_PRESENTACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_PRESENTACION)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:FECHA_COBRO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_COBRO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:FECHA_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:FECHA_PAGO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:MONTO_PAGADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO_PAGADO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:IDFORMA_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDFORMA_PAGO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:DEBITO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:COMISION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:COMISION)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:CANTIDAD, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:CANTIDAD)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:DEBITO_COMISION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO_COMISION)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:CANTIDAD_CUOTAS_PAGADAS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:CANTIDAD_CUOTAS_PAGADAS)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:DEBITO_PAGO_CUOTAS, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:DEBITO_PAGO_CUOTAS)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:MONTO_TOTAL, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:MONTO_TOTAL)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:PRESENTADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PRESENTADO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:COBRADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:COBRADO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:PAGADO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:PAGADO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:IDUSUARIO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDUSUARIO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:USUARIO_PAGO, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:USUARIO_PAGO)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:IDPAGO_LIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:IDPAGO_LIQUIDACION)) , 'LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(LIQ1:SOCIOS_LIQUIDACION, WHO(LIQ1:RECORD,WHERE(LIQ1:RECORD,LIQ1:SOCIOS_LIQUIDACION)) , 'LIQUIDACIONAlias')
+    END
+    DbChangeTrigger.Update('LIQUIDACIONAlias')
+
+
+Hide:Relate:LIQUIDACIONAlias.Update PROCEDURE(BYTE FromForm=0)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update(FromForm)
+     IF NOT DbChangeTrigger.Equal('LIQUIDACIONAlias')
+        DbChangeTrigger.CheckChanges('LIQUIDACIONAlias',LIQUIDACIONAlias) 
+     END
+  RETURN ReturnValue
+
+
+Hide:Relate:PAGOS_LIQUIDACIONAlias.Init PROCEDURE()
+  CODE
+  _Hide:Access:PAGOS_LIQUIDACIONAlias.Init
+  SELF.Init(Access:PAGOS_LIQUIDACIONAlias,1)
+  SELF.SetAlias(Relate:PAGOS_LIQUIDACION)
+
+
+Hide:Access:PAGOS_LIQUIDACIONAlias.Fetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Fetch(K)
+   IF NOT DbChangeTrigger.SetThread('PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddThread('PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDPAGOS, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDPAGOS)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDSOCIO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDSOCIO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SUCURSAL, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SUCURSAL)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDLIQUIDACION, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDLIQUIDACION)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:FECHA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:FECHA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:HORA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:HORA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MES, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MES)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:ANO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:ANO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:PERIODO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:PERIODO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDUSUARIO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDUSUARIO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDRECIBO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDRECIBO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_FACTURA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_FACTURA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:INTERES_FACTURA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:INTERES_FACTURA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDSUBCUENTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDSUBCUENTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:AFECTADA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:AFECTADA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:DEBITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:DEBITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CUOTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CUOTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CANT_CUOTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CANT_CUOTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SEGURO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SEGURO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CANT_CUOTA_S, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CANT_CUOTA_S)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:GASTOS_ADM, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:GASTOS_ADM)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IMP_CHEQUE, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IMP_CHEQUE)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_CHEQUE, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_CHEQUE)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_DEBITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_DEBITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_TOTAL, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_TOTAL)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CREDITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CREDITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SOCIOS_LIQUIDACION, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SOCIOS_LIQUIDACION)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:GASTOS_BANCARIOS, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:GASTOS_BANCARIOS)) , 'PAGOS_LIQUIDACIONAlias')
+   END
+   DbChangeTrigger.Update('PAGOS_LIQUIDACIONAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:PAGOS_LIQUIDACIONAlias.Init PROCEDURE
+
+  CODE
+  SELF.Initialized = False
+  SELF.Buffer &= PAGL1:Record
+  SELF.AliasedFile &= Access:PAGOS_LIQUIDACION             !This is a File Alias, so assign aliased file manager
+  SELF.FileNameValue = 'PAGOS_LIQUIDACIONAlias'
+  SELF.SetErrors(GlobalErrors)
+  SELF.File &= PAGOS_LIQUIDACIONAlias
+  PARENT.Init
+  Access:PAGOS_LIQUIDACIONAlias &= SELF
+
+
+Hide:Access:PAGOS_LIQUIDACIONAlias.Insert PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Insert()
+  DbAudit.OnInsert('PAGOS_LIQUIDACIONAlias',PAGOS_LIQUIDACIONAlias)
+  RETURN ReturnValue
+
+
+Hide:Access:PAGOS_LIQUIDACIONAlias.Kill PROCEDURE
+
+  CODE
+  PARENT.Kill
+  Access:PAGOS_LIQUIDACIONAlias &= NULL                    ! File manager has been destroyed to assign null, it is an error to reference this after this point
+
+
+Hide:Access:PAGOS_LIQUIDACIONAlias.SaveBuffer PROCEDURE
+
+ReturnValue          USHORT,AUTO
+
+  CODE
+  ReturnValue = PARENT.SaveBuffer()
+   IF NOT DbChangeTrigger.SetThread('PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddThread('PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDPAGOS, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDPAGOS)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDSOCIO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDSOCIO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SUCURSAL, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SUCURSAL)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDLIQUIDACION, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDLIQUIDACION)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:FECHA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:FECHA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:HORA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:HORA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MES, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MES)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:ANO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:ANO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:PERIODO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:PERIODO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDUSUARIO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDUSUARIO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDRECIBO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDRECIBO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_FACTURA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_FACTURA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:INTERES_FACTURA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:INTERES_FACTURA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDSUBCUENTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDSUBCUENTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:AFECTADA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:AFECTADA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:DEBITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:DEBITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CUOTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CUOTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CANT_CUOTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CANT_CUOTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SEGURO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SEGURO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CANT_CUOTA_S, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CANT_CUOTA_S)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:GASTOS_ADM, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:GASTOS_ADM)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IMP_CHEQUE, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IMP_CHEQUE)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_CHEQUE, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_CHEQUE)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_DEBITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_DEBITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_TOTAL, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_TOTAL)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CREDITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CREDITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SOCIOS_LIQUIDACION, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SOCIOS_LIQUIDACION)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:GASTOS_BANCARIOS, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:GASTOS_BANCARIOS)) , 'PAGOS_LIQUIDACIONAlias')
+   END
+   DbChangeTrigger.Update('PAGOS_LIQUIDACIONAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:PAGOS_LIQUIDACIONAlias.TryFetch PROCEDURE(KEY K)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.TryFetch(K)
+   IF NOT DbChangeTrigger.SetThread('PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddThread('PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDPAGOS, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDPAGOS)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDSOCIO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDSOCIO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SUCURSAL, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SUCURSAL)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDLIQUIDACION, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDLIQUIDACION)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:FECHA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:FECHA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:HORA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:HORA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MES, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MES)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:ANO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:ANO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:PERIODO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:PERIODO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDUSUARIO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDUSUARIO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDRECIBO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDRECIBO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_FACTURA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_FACTURA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:INTERES_FACTURA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:INTERES_FACTURA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IDSUBCUENTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDSUBCUENTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:AFECTADA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:AFECTADA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:DEBITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:DEBITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CUOTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CUOTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CANT_CUOTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CANT_CUOTA)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SEGURO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SEGURO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CANT_CUOTA_S, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CANT_CUOTA_S)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:GASTOS_ADM, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:GASTOS_ADM)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:IMP_CHEQUE, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IMP_CHEQUE)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_CHEQUE, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_CHEQUE)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_DEBITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_DEBITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_TOTAL, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_TOTAL)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:CREDITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CREDITO)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:SOCIOS_LIQUIDACION, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SOCIOS_LIQUIDACION)) , 'PAGOS_LIQUIDACIONAlias')
+      DbChangeTrigger.AddItem(PAGL1:GASTOS_BANCARIOS, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:GASTOS_BANCARIOS)) , 'PAGOS_LIQUIDACIONAlias')
+   END
+   DbChangeTrigger.Update('PAGOS_LIQUIDACIONAlias')
+  RETURN ReturnValue
+
+
+Hide:Access:PAGOS_LIQUIDACIONAlias.Update PROCEDURE
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update()
+    IF NOT DbChangeTrigger.Equal('PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.CheckChanges('PAGOS_LIQUIDACIONAlias',PAGOS_LIQUIDACIONAlias) 
+    END
+  RETURN ReturnValue
+
+
+Hide:Access:PAGOS_LIQUIDACIONAlias.UseFile PROCEDURE(BYTE UseType = UseType:Uses)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  IF UseType ~= UseType:Initialize
+    SELF.UseFile(UseType:Initialize)                       !Recursive call to ensure initialization takes place
+  END
+  IF UseType = UseType:Initialize AND ~SELF.Initialized
+    SELF.InUseFile = True
+    SELF.Init(PAGOS_LIQUIDACIONAlias,GlobalErrors)
+    SELF.Create = 0
+    SELF.LockRecover = 10
+    SELF.AddKey(PAGL1:FK_PAGOS_LIQUIDACION_SOCIOS,'PAGL1:FK_PAGOS_LIQUIDACION_SOCIOS',0)
+    SELF.AddKey(PAGL1:PK_PAGOS_LIQUIDACION,'PAGL1:PK_PAGOS_LIQUIDACION',0)
+    SELF.AddKey(PAGL1:FK_PAGOS_LIQUIDACION_USUARIOS,'PAGL1:FK_PAGOS_LIQUIDACION_USUARIOS',0)
+    SELF.AddKey(PAGL1:IDX_PAGOS_LIQUIDACION_PAGO,'PAGL1:IDX_PAGOS_LIQUIDACION_PAGO',0)
+  END
+                                                           !SELF.InUseFile will be set to False in PARENT
+  ReturnValue = PARENT.UseFile(UseType)
+  RETURN ReturnValue
+
+
+Hide:Relate:PAGOS_LIQUIDACIONAlias.Delete PROCEDURE(BYTE Query=1)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Delete(Query)
+  DbAudit.OnDelete('PAGOS_LIQUIDACIONAlias',PAGOS_LIQUIDACIONAlias)
+  RETURN ReturnValue
+
+
+Hide:Relate:PAGOS_LIQUIDACIONAlias.Kill PROCEDURE
+
+  CODE
+  _Hide:Access:PAGOS_LIQUIDACIONAlias.Kill                 ! Kill the file manager
+  PARENT.Kill
+  Relate:PAGOS_LIQUIDACIONAlias &= NULL                    ! Assign NULL to the RelationManager's FileManager reference, it is an error to reference this after this point
+  DISPOSE(_Hide:Access:PAGOS_LIQUIDACIONAlias)             ! destroy the file manager
+
+
+Hide:Relate:PAGOS_LIQUIDACIONAlias.Save PROCEDURE
+
+  CODE
+  PARENT.Save
+    IF NOT DbChangeTrigger.SetThread('PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddThread('PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:IDPAGOS, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDPAGOS)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:IDSOCIO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDSOCIO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:SUCURSAL, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SUCURSAL)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:IDLIQUIDACION, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDLIQUIDACION)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:MONTO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:FECHA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:FECHA)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:HORA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:HORA)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:MES, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MES)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:ANO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:ANO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:PERIODO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:PERIODO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:IDUSUARIO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDUSUARIO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:IDRECIBO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDRECIBO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:MONTO_FACTURA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_FACTURA)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:INTERES_FACTURA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:INTERES_FACTURA)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:IDSUBCUENTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IDSUBCUENTA)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:AFECTADA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:AFECTADA)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:DEBITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:DEBITO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:CUOTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CUOTA)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:CANT_CUOTA, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CANT_CUOTA)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:SEGURO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SEGURO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:CANT_CUOTA_S, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CANT_CUOTA_S)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:GASTOS_ADM, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:GASTOS_ADM)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:IMP_CHEQUE, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:IMP_CHEQUE)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_CHEQUE, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_CHEQUE)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_DEBITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_DEBITO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:MONTO_IMP_TOTAL, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:MONTO_IMP_TOTAL)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:CREDITO, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:CREDITO)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:SOCIOS_LIQUIDACION, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:SOCIOS_LIQUIDACION)) , 'PAGOS_LIQUIDACIONAlias')
+       DbChangeTrigger.AddItem(PAGL1:GASTOS_BANCARIOS, WHO(PAGL1:RECORD,WHERE(PAGL1:RECORD,PAGL1:GASTOS_BANCARIOS)) , 'PAGOS_LIQUIDACIONAlias')
+    END
+    DbChangeTrigger.Update('PAGOS_LIQUIDACIONAlias')
+
+
+Hide:Relate:PAGOS_LIQUIDACIONAlias.Update PROCEDURE(BYTE FromForm=0)
+
+ReturnValue          BYTE,AUTO
+
+  CODE
+  ReturnValue = PARENT.Update(FromForm)
+     IF NOT DbChangeTrigger.Equal('PAGOS_LIQUIDACIONAlias')
+        DbChangeTrigger.CheckChanges('PAGOS_LIQUIDACIONAlias',PAGOS_LIQUIDACIONAlias) 
+     END
+  RETURN ReturnValue
+

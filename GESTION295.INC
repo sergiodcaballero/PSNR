@@ -1,0 +1,3 @@
+  MODULE('GESTION295.CLW')
+UpdateSERVICIOXSOCIO   PROCEDURE                      !Actualizacion SERVICIOXSOCIO
+  END

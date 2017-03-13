@@ -1,0 +1,3 @@
+  MODULE('GESTION252.CLW')
+Imprimir_Ver_Factura   PROCEDURE(STRING,STRING)
+  END

@@ -1,0 +1,3 @@
+  MODULE('GESTION076.CLW')
+UpdateTIPO_PROVEEDOR   PROCEDURE                      !Actualizacion TIPO_PROVEEDOR
+  END

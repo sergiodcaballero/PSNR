@@ -1,0 +1,3 @@
+  MODULE('GESTION154.CLW')
+Reporte:SERVICIOXSOCIO PROCEDURE                      !Report the SERVICIOXSOCIO File
+  END

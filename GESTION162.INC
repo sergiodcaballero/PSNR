@@ -1,0 +1,3 @@
+  MODULE('GESTION162.CLW')
+CARGA_EMAIL            PROCEDURE                      !CARGA EMAIL SOCIO
+  END

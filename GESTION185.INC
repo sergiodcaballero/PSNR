@@ -1,0 +1,3 @@
+  MODULE('GESTION185.CLW')
+Liquidacion_reporte_11 PROCEDURE
+  END

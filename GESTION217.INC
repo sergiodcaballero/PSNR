@@ -1,0 +1,3 @@
+  MODULE('GESTION217.CLW')
+UpdateCURSO_INSCRIPCION PROCEDURE                     !Actualizacion CURSO_INSCRIPCION
+  END

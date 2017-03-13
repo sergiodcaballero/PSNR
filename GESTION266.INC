@@ -1,0 +1,3 @@
+  MODULE('GESTION266.CLW')
+CANCELAR_CONVENIO      PROCEDURE                      !Browse the CONVENIO File
+  END

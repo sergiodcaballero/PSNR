@@ -1,0 +1,82 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{638CBAAE-9A7B-4355-9CFA-21FDA37D7212}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Padron</AssemblyName>
+    <OutputName>Padron</OutputName>
+    <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
+    <Model>Dll</Model>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <vid>full</vid>
+    <check_stack>True</check_stack>
+    <check_index>True</check_index>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <vid>off</vid>
+    <check_stack>False</check_stack>
+    <check_index>False</check_index>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Padron.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron001.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron002.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron014.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron015.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron016.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron017.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron018.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron019.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron020.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron021.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron022.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron023.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron024.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="PADRON_BC.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Padron_BC0.CLW">
+      <Generated>true</Generated>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <FileDriver Include="dBase4" />
+    <FileDriver Include="ODBC" />
+    <FileDriver Include="TOPSPEED" />
+  </ItemGroup>
+  <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
+</Project>

@@ -1,0 +1,179 @@
+[PROCEDURE]
+NAME LOCALIDAD
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'Browse the LOCALIDAD file'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+LOCALIDAD
+[INSTANCE]
+1
+[KEY]
+LOC:PK_LOCALIDAD
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (0)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  (1,2,3)
+%SortCondition DEPEND %SortOrder @S255 TIMES 3
+WHEN  (1) ('CHOICE(?CurrentTab) = 2')
+WHEN  (2) ('CHOICE(?CurrentTab) = 3')
+WHEN  (3) ('CHOICE(?CurrentTab) = 4')
+%SortKey DEPEND %SortOrder KEY TIMES 3
+WHEN  (1) (LOC:FK_LOCALIDAD_PAIS)
+WHEN  (2) (LOC:KEY_CP)
+WHEN  (3) (LOC:NOMBRE)
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 3
+WHEN  (1) ('Step')
+WHEN  (2) ('Step')
+WHEN  (3) ('Step')
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 3
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 3
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 3
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 0 !HOLA 0
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 3
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 3
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 3
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+%SortRangeFile DEPEND %SortOrder FILE TIMES 3
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 3
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 3
+WHEN  (1) ('Fixed Thumb')
+WHEN  (2) ('Fixed Thumb')
+WHEN  (3) ('Fixed Thumb')
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 3
+WHEN  (1) ('Runtime')
+WHEN  (2) ('Runtime')
+WHEN  (3) ('Runtime')
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 3
+WHEN  (1)TIMES 0
+WHEN  (2)TIMES 0
+WHEN  (3)TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 3
+WHEN  (1) (1)
+WHEN  (2) (1)
+WHEN  (3) (1)
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 3
+WHEN  (1) (0)
+WHEN  (2) (0)
+WHEN  (3) (0)
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 3
+WHEN  (1) (0)
+WHEN  (2) (0)
+WHEN  (3) (0)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 2
+[ADDITION]
+NAME ABC SortOrderDrop
+[INSTANCE]
+INSTANCE 3
+[PROMPTS]
+%SheetControl DEFAULT  ('?CurrentTab')
+%SheetHiden LONG  (0)
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 4
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Browse the LOCALIDAD file'),AT(,,358,198),IMM,RESIZE,GRAY,MDI,HLP('LOCALIDAD'),FONT('MS Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,30,342,146),USE(?Browse:1),MSG('Administrador de LOCALIDAD'),IMM,HVSCROLL,|
+      FORMAT('64R(2)|M~IDLOCALIDAD~C(0)@n-14@80L(2)|M~DESCRIPCION~L(2)@s50@64R(2)|M~CP~C(0)@n-14@80L(2)|M~CPNUEVO~L(2)@s20@64R(2)|M~IDPAIS~C(0)@n-14@60L(2)|M~COD TELEFONICO~L(2)@s10@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(LOC:IDLOCALIDAD,LOC:DESCRIPCION,LOC:CP,LOC:CPNUEVO,LOC:IDPAIS,LOC:COD_TELEFONICO)
+  SHEET,AT(4,4,350,172),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('PK_LOCALIDAD'),USE(?Tab:2)
+    END
+    TAB('FK_LOCALIDAD_PAIS'),USE(?Tab:3)
+    END
+    TAB('KEY_CP'),USE(?Tab:4)
+    END
+    TAB('NOMBRE'),USE(?Tab:5)
+    END
+  END
+  BUTTON('&Salir'),AT(305,180,49,14),USE(?Close),ICON('salir.ico'),FLAT,CURSOR('mano.cur'),MSG('Salir'),TIP('Salir'),LEFT,#SEQ(2),#ORIG(?Close)
+  PROMPT('&Orden:'),AT(8,13),USE(?SortOrderList:Prompt),#SEQ(3),#ORIG(?SortOrderList:Prompt)
+  LIST,AT(48,13,75,10),USE(?SortOrderList),MSG('Select the Sort Order'),TIP('Select the Sort Order'),DROP(20),FROM(''),#SEQ(3),#ORIG(?SortOrderList)
+ END

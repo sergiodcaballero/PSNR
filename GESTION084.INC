@@ -1,0 +1,3 @@
+  MODULE('GESTION084.CLW')
+UpdateTIPO_COBERTURA   PROCEDURE                      !Actualizacion TIPO_COBERTURA
+  END

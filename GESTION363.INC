@@ -1,0 +1,3 @@
+  MODULE('GESTION363.CLW')
+SelectTIPO_COMPROBANTE PROCEDURE                      !Select a TIPO_COMPROBANTE Record
+  END

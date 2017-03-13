@@ -1,0 +1,3 @@
+  MODULE('GESTION096.CLW')
+ABM_BANCO_COG_REGISTRO PROCEDURE                      !Browse the BANCO_COD_REG File
+  END

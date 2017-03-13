@@ -1,0 +1,3 @@
+  MODULE('GESTION167.CLW')
+REPORTE_COLEGIADOXOS_3 PROCEDURE                      !Browse the RANKING File
+  END

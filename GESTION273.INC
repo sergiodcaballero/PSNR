@@ -1,0 +1,3 @@
+  MODULE('GESTION273.CLW')
+CERTIFICADO_MATRICULA  PROCEDURE                      !Browse the SOCIOS file
+  END

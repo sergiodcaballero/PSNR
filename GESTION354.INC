@@ -1,0 +1,3 @@
+  MODULE('GESTION354.CLW')
+IMPRIMIR_CUENTA_INGRESO PROCEDURE                     !Administrador de RANKING
+  END

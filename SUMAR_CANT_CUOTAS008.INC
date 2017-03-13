@@ -1,0 +1,3 @@
+  MODULE('SUMAR_CANT_CUOTAS008.CLW')
+Cant_Cuotas            PROCEDURE
+  END

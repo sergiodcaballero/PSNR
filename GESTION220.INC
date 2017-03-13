@@ -1,0 +1,3 @@
+  MODULE('GESTION220.CLW')
+CURSOS_INSCRIPCION     PROCEDURE                      !Browse the CURSO_INSCRIPCION File
+  END

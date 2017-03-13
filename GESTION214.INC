@@ -1,0 +1,3 @@
+  MODULE('GESTION214.CLW')
+SelectTIPO_PROVEEDOR   PROCEDURE                      !Select a TIPO_PROVEEDOR Record
+  END

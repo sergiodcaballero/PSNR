@@ -1,0 +1,3 @@
+  MODULE('GESTION080.CLW')
+Formulario_TIPO_COMPROBANTE PROCEDURE                 !Actualizacion TIPO_COMPROBANTE
+  END

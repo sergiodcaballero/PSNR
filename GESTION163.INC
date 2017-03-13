@@ -1,0 +1,3 @@
+  MODULE('GESTION163.CLW')
+CUPON_DE_PAGO3:IMPRIMIR PROCEDURE                     !Window
+  END

@@ -1,0 +1,3 @@
+  MODULE('GESTION054.CLW')
+ABMTRABAJOSXSOCIOS     PROCEDURE                      !Administrador de SOCIOSXTRABAJO
+  END

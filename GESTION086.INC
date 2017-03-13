@@ -1,0 +1,3 @@
+  MODULE('GESTION086.CLW')
+ABM_NIVEL_FORMACION    PROCEDURE                      !Actualizacion NIVEL_FORMACION
+  END

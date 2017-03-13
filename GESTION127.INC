@@ -1,0 +1,3 @@
+  MODULE('GESTION127.CLW')
+LIQUIDACION_PAGO_FORM  PROCEDURE                      !Actualizacion LIQUIDACION
+  END

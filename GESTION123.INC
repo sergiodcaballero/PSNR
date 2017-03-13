@@ -1,0 +1,3 @@
+  MODULE('GESTION123.CLW')
+IMPRIMIR_COBRO_CUOTA_LIQ PROCEDURE                    !Recibo de Pago 
+  END

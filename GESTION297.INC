@@ -1,0 +1,3 @@
+  MODULE('GESTION297.CLW')
+BrowseSERVICIOXSOCIO   PROCEDURE                      !Browse the SERVICIOXSOCIO file
+  END

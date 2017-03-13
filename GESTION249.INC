@@ -1,0 +1,3 @@
+  MODULE('GESTION249.CLW')
+GENERAR_LIQUIDACION    PROCEDURE                      !Window
+  END

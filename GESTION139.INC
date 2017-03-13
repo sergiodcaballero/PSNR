@@ -1,0 +1,3 @@
+  MODULE('GESTION139.CLW')
+Formulario_NOMENCLADORXOS PROCEDURE                   !Actualizacion NOMENCLADORXOS
+  END

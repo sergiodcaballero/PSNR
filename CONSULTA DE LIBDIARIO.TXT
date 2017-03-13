@@ -1,0 +1,19 @@
+select 
+    subcuentas.descripcion,
+    cuentas.descripcion,
+    libdiario.debe,
+    libdiario.haber,
+    libdiario.observacion,
+    libdiario.fecha,
+    libdiario.hora,
+    libdiario.mes,
+    libdiario.ano,
+    libdiario.periodo,
+    libdiario.sucursal,
+    libdiario.recibo,
+    libdiario.tipo,
+    fondos.nombre_fondo
+from fondos
+   inner join subcuentas on (fondos.idfondo = subcuentas.idfondo)
+   inner join libdiario on (subcuentas.idsubcuenta = libdiario.idsubcuenta)
+   inner join cuentas on (subcuentas.idcuenta = cuentas.idcuenta)

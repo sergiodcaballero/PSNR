@@ -1,0 +1,3 @@
+  MODULE('GESTION128.CLW')
+LIQUIDACION_PAGO       PROCEDURE                      !Browse the LIQUIDACION File
+  END

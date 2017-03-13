@@ -1,0 +1,3 @@
+  MODULE('GESTION121.CLW')
+IMPRIMIR_COBRO_SEGURO_LIQ PROCEDURE                   !Recibo de Pago 
+  END

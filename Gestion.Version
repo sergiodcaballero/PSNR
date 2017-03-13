@@ -1,0 +1,34 @@
+LANGUAGE 0x080A
+
+1 VERSIONINFO
+ FILEVERSION 0,0,0,27
+ PRODUCTVERSION 1,0,0,27
+ FILEFLAGSMASK 0x3FL
+ FILEFLAGS 0
+ FILEOS VOS__WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE 0x0L
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "080A04E4"
+      BEGIN
+        VALUE "CompanyName", "Colegio de Profesionales de la Enfermería   de la Prcia. de Misiones\0"
+        VALUE "FileVersion", "0.0.0.27\0"
+        VALUE "InternalName", "Gestion\0"
+        VALUE "LegalCopyright", "Copyright (c) 2007\0"
+        VALUE "LegalTrademarks", "Trademark\0"
+        VALUE "OriginalFilename", "Gestion.EXE\0"
+        VALUE "ProductName", "Sistema de Gestión\0"
+        VALUE "ProductVersion", "1.0.0.27\0"
+        VALUE "Comments", "ASC Sergio D Caballero sergiodcaballero@gmail.com\0"
+        VALUE "Clarion Version", "10000\0"
+        VALUE "Template Family", "ABC\0"
+        VALUE "Template Version", "v10.0\0"
+      END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x080A, 1252
+    END
+END

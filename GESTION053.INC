@@ -1,0 +1,3 @@
+  MODULE('GESTION053.CLW')
+UpdateSOCIOSXTRABAJO   PROCEDURE                      !Actualizacion SOCIOSXTRABAJO
+  END

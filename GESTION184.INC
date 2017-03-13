@@ -1,0 +1,3 @@
+  MODULE('GESTION184.CLW')
+ESTADO_DEUDA_EMAIL1    PROCEDURE                      !Window
+  END

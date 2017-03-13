@@ -1,0 +1,3 @@
+  MODULE('GESTION209.CLW')
+FACTURA_ANUAL_TOTAL    PROCEDURE                      !Window
+  END

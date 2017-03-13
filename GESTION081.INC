@@ -1,0 +1,3 @@
+  MODULE('GESTION081.CLW')
+ABM_TIPO_COMPROBANTE   PROCEDURE                      !Administrador de TIPO_COMPROBANTE
+  END

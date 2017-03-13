@@ -1,0 +1,225 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{72E91DBE-4CDC-4785-81F0-C83EA22118F4}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Gestion</AssemblyName>
+    <OutputName>Gestion</OutputName>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <DefineConstants>NETTALKLOG=&gt;1%3b_ODDJOB_=&gt;0%3b_CRYPTONITE_=&gt;0%3bStringTheoryLinkMode=&gt;1%3bStringTheoryDllMode=&gt;0%3bMD5=&gt;0%3b_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1%3b_NetTalkDllMode_=&gt;0%3b_NetTalkLinkMode_=&gt;1</DefineConstants>
+    <Model>Dll</Model>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <vid>full</vid>
+    <check_stack>True</check_stack>
+    <check_index>True</check_index>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <vid>off</vid>
+    <check_stack>False</check_stack>
+    <check_index>False</check_index>
+  </PropertyGroup>
+  <ItemGroup>
+    <FileDriver Include="ASCII" />
+    <FileDriver Include="BASIC" />
+    <FileDriver Include="DOS" />
+    <FileDriver Include="ODBC" />
+    <FileDriver Include="TOPSPEED" />
+    <Compile Include="Gestion.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion001.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion002.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion003.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion004.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion005.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion006.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion007.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion008.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion009.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion010.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion011.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion012.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion013.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion014.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion015.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion016.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion017.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion018.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion019.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion020.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion021.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion022.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion023.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion024.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion025.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion026.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion027.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion028.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion029.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion030.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion031.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion032.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion033.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion034.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion035.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion036.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion037.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="GESTION_BC.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion_BC0.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion_BC1.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion_BC2.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion_BC3.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion_BC4.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Gestion_BC5.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Library Include="ABDNROW.ICO" />
+    <Library Include="Aceptar.ICO" />
+    <Library Include="bullet_ball_green.ico" />
+    <Library Include="bullet_ball_red.ico" />
+    <Library Include="bullet_ball_yellow.ico" />
+    <Library Include="CANCEL.ICO" />
+    <Library Include="cancelar.ico" />
+    <Library Include="ClaASC.lib" />
+    <Library Include="ClaDOS.lib" />
+    <Library Include="Claevo.lib" />
+    <Library Include="clanet.lib" />
+    <Library Include="ClaOLE.lib" />
+    <Library Include="ec_mail.Lib" />
+    <Library Include="Gestion.Version" />
+    <Library Include="NEW.ICO" />
+    <Library Include="no.ICO" />
+    <Library Include="POSTED2.ICO" />
+    <Library Include="QkLoad.ico" />
+    <Library Include="QkQBE.ico" />
+    <Library Include="SCANCEL.ICO" />
+    <Library Include="SCH-ORD.ICO" />
+    <Library Include="SDOWN.ICO" />
+    <Library Include="SOK.ICO" />
+    <Library Include="SUP.ICO" />
+    <Library Include="total.ICO" />
+    <None Include="caroot.pem">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </None>
+    <None Include="libeay32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </None>
+    <None Include="libssl32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </None>
+    <None Include="msvcr120.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </None>
+    <None Include="ssleay32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </None>
+    <None Include="zlibwapi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generated>True</Generated>
+      <ProjectGenerated>True</ProjectGenerated>
+    </None>
+  </ItemGroup>
+  <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
+</Project>

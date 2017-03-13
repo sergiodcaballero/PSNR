@@ -1,0 +1,3 @@
+  MODULE('GESTION346.CLW')
+SelectSUBCUENTAS_INGRESOS PROCEDURE                   !Select a SUBCUENTAS Record
+  END

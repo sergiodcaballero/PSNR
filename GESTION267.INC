@@ -1,0 +1,3 @@
+  MODULE('GESTION267.CLW')
+IMPRIMIR_PAGO_CONVENIO PROCEDURE                      !Recibo de Pago 
+  END

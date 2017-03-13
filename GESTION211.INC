@@ -1,0 +1,3 @@
+  MODULE('GESTION211.CLW')
+FACTURA_ANUAL_IND      PROCEDURE                      !Browse the INGRESOS_FACTURA file
+  END

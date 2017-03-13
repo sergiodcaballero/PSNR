@@ -1,0 +1,3 @@
+  MODULE('GESTION287.CLW')
+BrowseTIPO_INSTITUCION PROCEDURE                      !Browse the TIPO_INSTITUCION file
+  END

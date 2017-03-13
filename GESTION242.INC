@@ -1,0 +1,3 @@
+  MODULE('GESTION242.CLW')
+UpdatePAGOSXCIRCULO    PROCEDURE                      !Actualizacion PAGOSXCIRCULO
+  END

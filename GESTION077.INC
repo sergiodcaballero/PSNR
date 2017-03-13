@@ -1,0 +1,3 @@
+  MODULE('GESTION077.CLW')
+ABM_TIPO_PROVEEDOR     PROCEDURE                      !Browse the TIPO_PROVEEDOR File
+  END

@@ -1,0 +1,3 @@
+  MODULE('GESTION286.CLW')
+UpdateTIPO_INSTITUCION PROCEDURE                      !Actualizacion TIPO_INSTITUCION
+  END

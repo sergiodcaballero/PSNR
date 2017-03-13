@@ -1,0 +1,3 @@
+  MODULE('GESTION188.CLW')
+DEUDA2                 PROCEDURE
+  END

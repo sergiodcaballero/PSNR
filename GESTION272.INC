@@ -1,0 +1,3 @@
+  MODULE('GESTION272.CLW')
+CARGAR_STRING          PROCEDURE                      !CARGAR STRING
+  END

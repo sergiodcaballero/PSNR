@@ -1,0 +1,3 @@
+  MODULE('GESTION314.CLW')
+SelectTIPO_INSTITUCION PROCEDURE                      !Select a TIPO_INSTITUCION Record
+  END

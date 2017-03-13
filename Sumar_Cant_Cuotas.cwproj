@@ -1,0 +1,69 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{B1DDD0C1-F3D6-4257-B132-C1C2FE8FC04F}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Sumar_Cant_Cuotas</AssemblyName>
+    <OutputName>Sumar_Cant_Cuotas</OutputName>
+    <DefineConstants>_ABCDllMode_=&gt;0%3b_ABCLinkMode_=&gt;1</DefineConstants>
+    <Model>Dll</Model>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <vid>full</vid>
+    <check_stack>True</check_stack>
+    <check_index>True</check_index>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <vid>off</vid>
+    <check_stack>False</check_stack>
+    <check_index>False</check_index>
+  </PropertyGroup>
+  <ItemGroup>
+    <FileDriver Include="ODBC" />
+    <Compile Include="Sumar_Cant_Cuotas.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas001.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas002.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas003.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas004.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas005.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas006.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas007.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas008.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas009.clw">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="SUMAR_CANT_CUOTAS_BC.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas_BC0.CLW">
+      <Generated>true</Generated>
+    </Compile>
+    <Compile Include="Sumar_Cant_Cuotas_BC1.CLW">
+      <Generated>true</Generated>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(ClarionBinPath)\SoftVelocity.Build.Clarion.targets" />
+</Project>

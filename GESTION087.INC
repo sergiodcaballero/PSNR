@@ -1,0 +1,3 @@
+  MODULE('GESTION087.CLW')
+SelectNIVEL_FORMACION  PROCEDURE                      !Select a NIVEL_FORMACION Record
+  END

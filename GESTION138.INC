@@ -1,0 +1,3 @@
+  MODULE('GESTION138.CLW')
+ABM_OBRAS_SOCIALES     PROCEDURE                      !Browse the OBRA_SOCIAL File
+  END

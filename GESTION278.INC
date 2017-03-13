@@ -1,0 +1,3 @@
+  MODULE('GESTION278.CLW')
+CERTIFICADO_CV         PROCEDURE                      !IMPRIMIR CV 
+  END
