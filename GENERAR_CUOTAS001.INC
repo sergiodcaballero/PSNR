@@ -6,4 +6,5 @@ SelectUSUARIO          PROCEDURE                      !Select a USUARIO Record
 UpdateFACTURA          PROCEDURE                      !Actualizacion FACTURA
 SelectSOCIOS           PROCEDURE                      !Select a SOCIOS Record
 ArchivoFACTURA         PROCEDURE                      !Browse the FACTURA file
+calcula_monto          PROCEDURE                      !GENERA DETALLE FACTURA POR CUOTA
   END

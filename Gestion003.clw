@@ -1331,23 +1331,25 @@ QuickWindow          WINDOW('Actualizacion Colegiados'),AT(,,521,312),FONT('Aria
                          STRING(@s50),AT(397,113,117,10),USE(MCS:DESCRIPCION)
                        END
                        GROUP('CUOTA'),AT(2,127,518,38),USE(?Group6),BOXED
-                         ENTRY(@n-14),AT(40,138,18,10),USE(SOC:IDCOBERTURA)
-                         ENTRY(@P##-########-#P),AT(168,138,61,10),USE(SOC:CUIT)
-                         ENTRY(@n-14),AT(265,138,21,10),USE(SOC:TIPOIVA),RIGHT(1)
-                         ENTRY(@n-14),AT(346,138,21,10),USE(SOC:IDBANCO),REQ
-                         ENTRY(@N022),AT(420,138,95,10),USE(SOC:CBU)
+                         ENTRY(@n-14),AT(40,139,18,10),USE(SOC:IDCOBERTURA)
+                         ENTRY(@P##-########-#P),AT(168,151,61,10),USE(SOC:CUIT)
+                         ENTRY(@n-14),AT(265,151,21,10),USE(SOC:TIPOIVA),RIGHT(1)
+                         ENTRY(@n-14),AT(346,151,21,10),USE(SOC:IDBANCO),REQ
+                         ENTRY(@N022),AT(420,151,95,10),USE(SOC:CBU)
                          ENTRY(@n-14),AT(40,152,48,10),USE(SOC:ANSSAL),RIGHT(1)
-                         PROMPT('CUIT:'),AT(150,139),USE(?SOC:CUIT:Prompt)
+                         PROMPT('CUIT:'),AT(150,151),USE(?SOC:CUIT:Prompt)
                          PROMPT('IDCUOTA:'),AT(5,139),USE(?SOC:IDCOBERTURA:Prompt),TRN
                          BUTTON('...'),AT(60,137,12,12),USE(?CallLookup:5)
-                         STRING(@s20),AT(74,138,51,10),USE(COB:DESCRIPCION)
-                         STRING(@n-5),AT(127,138),USE(COB:MONTO)
-                         PROMPT('TIPOIVA:'),AT(235,138),USE(?SOC:TIPOIVA:Prompt)
-                         BUTTON('...'),AT(291,137,12,12),USE(?CallLookup:9)
-                         PROMPT('IDBANCO:'),AT(308,138),USE(?SOC:IDBANCO:Prompt)
-                         BUTTON('...'),AT(371,137,12,12),USE(?CallLookup:10)
-                         PROMPT('CBU:'),AT(395,138),USE(?SOC:CBU:Prompt)
+                         STRING(@s20),AT(74,138,85,10),USE(COB:DESCRIPCION)
+                         STRING(@n-5),AT(160,138),USE(COB:MONTO)
+                         PROMPT('TIPOIVA:'),AT(235,151),USE(?SOC:TIPOIVA:Prompt)
+                         BUTTON('...'),AT(291,150,12,12),USE(?CallLookup:9)
+                         PROMPT('IDBANCO:'),AT(308,151),USE(?SOC:IDBANCO:Prompt)
+                         BUTTON('...'),AT(371,151,12,12),USE(?CallLookup:10)
+                         PROMPT('CBU:'),AT(395,151),USE(?SOC:CBU:Prompt)
                          PROMPT('ANSSAL:'),AT(5,153),USE(?SOC:SSALUD:Prompt)
+                         PROMPT('DESCUENTO ESPECIAL:'),AT(211,139),USE(?SOC:DESCUENTO:Prompt)
+                         ENTRY(@n$-14),AT(293,139,60,10),USE(SOC:DESCUENTO)
                        END
                        GROUP('TITULO'),AT(1,165,517,41),USE(?Group3),BOXED
                          PROMPT('IDINSTITUCION:'),AT(4,177),USE(?SOC:IDINSTITUCION:Prompt),TRN
@@ -1499,6 +1501,7 @@ ReturnValue          BYTE,AUTO
   SELF.AddHistoryField(?SOC:IDBANCO,53)
   SELF.AddHistoryField(?SOC:CBU,54)
   SELF.AddHistoryField(?SOC:ANSSAL,55)
+  SELF.AddHistoryField(?SOC:DESCUENTO,19)
   SELF.AddHistoryField(?SOC:IDINSTITUCION,37)
   SELF.AddHistoryField(?SOC:FECHA_EGRESO,38)
   SELF.AddHistoryField(?SOC:FECHA_TITULO,42)
@@ -1584,6 +1587,7 @@ ReturnValue          BYTE,AUTO
     DISABLE(?CallLookup:5)
     DISABLE(?CallLookup:9)
     DISABLE(?CallLookup:10)
+    ?SOC:DESCUENTO{PROP:ReadOnly} = True
     ?SOC:IDINSTITUCION{PROP:ReadOnly} = True
     DISABLE(?CallLookup)
     ?SOC:FECHA_EGRESO{PROP:ReadOnly} = True

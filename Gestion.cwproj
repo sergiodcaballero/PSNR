@@ -184,11 +184,6 @@
     <Library Include="POSTED2.ICO" />
     <Library Include="QkLoad.ico" />
     <Library Include="QkQBE.ico" />
-    <Library Include="SCANCEL.ICO" />
-    <Library Include="SCH-ORD.ICO" />
-    <Library Include="SDOWN.ICO" />
-    <Library Include="SOK.ICO" />
-    <Library Include="SUP.ICO" />
     <Library Include="total.ICO" />
     <None Include="caroot.pem">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

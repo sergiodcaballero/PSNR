@@ -1,0 +1,1298 @@
+[APPLICATION]
+PROCEDURE Main
+DICTIONARY 'F:\Sistemas\Sis10\PsRN\Psrn.dct'
+[COMMON]
+FROM ABC
+[PROMPTS]
+%ActiveInvisible  DEFAULT (0)
+%AllowUnFilled    DEFAULT (0)
+%RetainRow        DEFAULT (0)
+%ResetOnGainFocus DEFAULT (0)
+%AutoToolBar      DEFAULT (1)
+%AutoRefresh      DEFAULT (1)
+[PROCEDURE]
+NAME Main
+[COMMON]
+DESCRIPTION 'Wizard Application for F:\Sistemas\Sis10\PsRN\Psrn.dct'
+FROM ABC Frame
+[DATA]
+[FILES]
+[OTHERS]
+FACTURA
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 1
+WHEN  ('?ArchivoFACTURA') ('Call a Procedure')
+
+%ButtonRunName DEPEND %Control STRING TIMES 1
+WHEN  ('?ArchivoFACTURA') ('')
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 1
+WHEN  ('?ArchivoFACTURA') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?ArchivoFACTURA') (ArchivoFACTURA)
+
+%ButtonThread DEPEND %Control LONG TIMES 1
+WHEN  ('?ArchivoFACTURA') (1)
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 1
+WHEN  ('?ArchivoFACTURA') (50000)
+
+%ButtonParameters DEPEND %Control STRING TIMES 1
+WHEN  ('?ArchivoFACTURA') ('')
+
+%ButtonRequest DEPEND %Control STRING TIMES 1
+WHEN  ('?ArchivoFACTURA') ('')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[EMBED]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+SQLOpenWindow        WINDOW('Initializing Database'),AT(,,208,26),FONT('Microsoft Sans Serif',8,,FONT:regular),CENTER,GRAY,DOUBLE
+                       STRING('This process could take several seconds.'),AT(27,12)
+                       IMAGE(Icon:Connect),AT(4,4,23,17)
+                       STRING('Please wait while the program connects to the database.'),AT(27,3)
+                     END
+
+[END]
+[END]
+[EMBED]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 6400
+PROPERTY:END
+SETCURSOR(Cursor:Wait)
+OPEN(SQLOpenWindow)
+ACCEPT
+  IF EVENT() = Event:OpenWindow
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7800
+PROPERTY:END
+    POST(EVENT:CloseWindow)
+  END
+END
+CLOSE(SQLOpenWindow)
+SETCURSOR()
+[END]
+[END]
+[END]
+[END]
+[WINDOW]
+AppFrame APPLICATION('Application'),AT(,,505,318),STATUS(-1,80,120,45),MAX,RESIZE,ICON('WAFRAME.ICO'),FONT('MS Sans Serif',8,,400,1),CENTER,SYSTEM
+  MENUBAR,USE(?Menubar)
+       MENU('&Archivo'),USE(?FileMenu)
+       ITEM('&Configuracion Impresora'),USE(?PrintSetup),MSG('Configuracion Impresora'),STD(STD:PrintSetup)
+       ITEM,SEPARATOR
+       ITEM('&Salir'),USE(?Exit),MSG('Salir de la Aplicacion'),STD(STD:Close)
+       END
+       MENU('&Editar'),USE(?EditMenu)
+       ITEM('Co&rtar'),USE(?Cut),MSG('Corta la seleccion al Clipboard'),STD(STD:Cut)
+       ITEM('&Copiar'),USE(?Copy),MSG('Copia la seleccion al Clipboard'),STD(STD:Copy)
+       ITEM('&Pegar'),USE(?Paste),MSG('Pega desde el Clipboard'),STD(STD:Paste)
+       END
+       MENU('&Browse'),USE(?BrowseMenu)
+       ITEM('Browse the FACTURA file'),USE(?ArchivoFACTURA),MSG('Browse FACTURA')
+       END
+       MENU('&Window'),USE(?WindowMenu),STD(STD:WindowList)
+       ITEM('&Vertical'),USE(?Tile),MSG('Vertical'),STD(STD:TileWindow)
+       ITEM('&Cascada'),USE(?Cascade),MSG('Cascada'),STD(STD:CascadeWindow)
+       ITEM('&Organizar Iconos'),USE(?Arrange),MSG('Organizar iconos'),STD(STD:ArrangeIcons)
+       END
+       MENU('&Ayuda'),USE(?HelpMenu)
+       ITEM('&Contenido'),USE(?Helpindex),MSG('Visualiza el contenido del Help'),STD(STD:HelpIndex)
+       ITEM('&Busqueda Help On Line...'),USE(?HelpSearch),MSG(''),STD(STD:HelpSearch)
+       ITEM('C&omo utilizar el Help'),USE(?HelpOnHelp),MSG('Ayuda de como utilizar el Help de la Aplicacion'),STD(STD:HelpOnHelp)
+       END
+  END
+ END
+[PROCEDURE]
+NAME ArchivoFACTURA
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'Browse the FACTURA file'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+FACTURA
+[INSTANCE]
+1
+[KEY]
+FAC:PK_FACTURA
+[OTHERS]
+SOCIOS
+USUARIO
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 2
+WHEN  ('?SelectSOCIOS') ('Call a Procedure')
+WHEN  ('?SelectUSUARIO') ('Call a Procedure')
+
+%ButtonRunName DEPEND %Control STRING TIMES 2
+WHEN  ('?SelectSOCIOS') ('')
+WHEN  ('?SelectUSUARIO') ('')
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 2
+WHEN  ('?SelectSOCIOS') ('')
+WHEN  ('?SelectUSUARIO') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 2
+WHEN  ('?SelectSOCIOS') (SelectSOCIOS)
+WHEN  ('?SelectUSUARIO') (SelectUSUARIO)
+
+%ButtonThread DEPEND %Control LONG TIMES 2
+WHEN  ('?SelectSOCIOS') (0)
+WHEN  ('?SelectUSUARIO') (0)
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 2
+WHEN  ('?SelectSOCIOS') (025000)
+WHEN  ('?SelectUSUARIO') (025000)
+
+%ButtonParameters DEPEND %Control STRING TIMES 2
+WHEN  ('?SelectSOCIOS') ('')
+WHEN  ('?SelectUSUARIO') ('')
+
+%ButtonRequest DEPEND %Control STRING TIMES 2
+WHEN  ('?SelectSOCIOS') ('Select')
+WHEN  ('?SelectUSUARIO') ('Select')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (0)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  (1,2,3,4,5,6,7,8)
+%SortCondition DEPEND %SortOrder @S255 TIMES 8
+WHEN  (1) ('CHOICE(?CurrentTab) = 2')
+WHEN  (2) ('CHOICE(?CurrentTab) = 3')
+WHEN  (3) ('CHOICE(?CurrentTab) = 4')
+WHEN  (4) ('CHOICE(?CurrentTab) = 5')
+WHEN  (5) ('CHOICE(?CurrentTab) = 6')
+WHEN  (6) ('CHOICE(?CurrentTab) = 7')
+WHEN  (7) ('CHOICE(?CurrentTab) = 8')
+WHEN  (8) ('CHOICE(?CurrentTab) = 9')
+%SortKey DEPEND %SortOrder KEY TIMES 8
+WHEN  (1) (FAC:FK_FACTURA_SOCIO)
+WHEN  (2) (FAC:FK_FACTURA_USUARIO)
+WHEN  (3) (FAC:IDX_FACTURA_ANO)
+WHEN  (4) (FAC:IDX_FACTURA_ESTADO)
+WHEN  (5) (FAC:IDX_FACTURA_FECHA)
+WHEN  (6) (FAC:IDX_FACTURA_MES)
+WHEN  (7) (FAC:IDX_FACTURA_PERIODO)
+WHEN  (8) (FAC:IDX_FACTURA_TOTAL)
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 8
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('Step')
+WHEN  (4) ('Step')
+WHEN  (5) ('Step')
+WHEN  (6) ('Step')
+WHEN  (7) ('Step')
+WHEN  (8) ('Step')
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 8
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+WHEN  (4) ('')
+WHEN  (5) ('')
+WHEN  (6) ('')
+WHEN  (7) ('')
+WHEN  (8) ('')
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 8
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+WHEN  (4) ('')
+WHEN  (5) ('')
+WHEN  (6) ('')
+WHEN  (7) ('')
+WHEN  (8) ('')
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 8
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+WHEN  (4) ('')
+WHEN  (5) ('')
+WHEN  (6) ('')
+WHEN  (7) ('')
+WHEN  (8) ('')
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 2
+WHEN  (1) (FAC:IDSOCIO)
+WHEN  (2) (FAC:IDUSUARIO)
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 8
+WHEN  (1) (FAC:IDSOCIO)
+WHEN  (2) (FAC:IDUSUARIO)
+WHEN  (3) ()
+WHEN  (4) ()
+WHEN  (5) ()
+WHEN  (6) ()
+WHEN  (7) ()
+WHEN  (8) ()
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 8
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+WHEN  (4) ()
+WHEN  (5) ()
+WHEN  (6) ()
+WHEN  (7) ()
+WHEN  (8) ()
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 8
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+WHEN  (4) ()
+WHEN  (5) ()
+WHEN  (6) ()
+WHEN  (7) ()
+WHEN  (8) ()
+%SortRangeFile DEPEND %SortOrder FILE TIMES 8
+WHEN  (1) (SOCIOS)
+WHEN  (2) (USUARIO)
+WHEN  (3) ()
+WHEN  (4) ()
+WHEN  (5) ()
+WHEN  (6) ()
+WHEN  (7) ()
+WHEN  (8) ()
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 8
+WHEN  (1) ('File Relationship')
+WHEN  (2) ('File Relationship')
+WHEN  (3) ('')
+WHEN  (4) ('')
+WHEN  (5) ('')
+WHEN  (6) ('')
+WHEN  (7) ('')
+WHEN  (8) ('')
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 8
+WHEN  (1) ('Fixed Thumb')
+WHEN  (2) ('Fixed Thumb')
+WHEN  (3) ('Fixed Thumb')
+WHEN  (4) ('Fixed Thumb')
+WHEN  (5) ('Fixed Thumb')
+WHEN  (6) ('Fixed Thumb')
+WHEN  (7) ('Fixed Thumb')
+WHEN  (8) ('Fixed Thumb')
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 8
+WHEN  (1) ('Runtime')
+WHEN  (2) ('Runtime')
+WHEN  (3) ('Runtime')
+WHEN  (4) ('Runtime')
+WHEN  (5) ('Runtime')
+WHEN  (6) ('Runtime')
+WHEN  (7) ('Runtime')
+WHEN  (8) ('Runtime')
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 8
+WHEN  (1)TIMES 0
+WHEN  (2)TIMES 0
+WHEN  (3)TIMES 0
+WHEN  (4)TIMES 0
+WHEN  (5)TIMES 0
+WHEN  (6)TIMES 0
+WHEN  (7)TIMES 0
+WHEN  (8)TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 8
+WHEN  (1) (1)
+WHEN  (2) (1)
+WHEN  (3) (1)
+WHEN  (4) (1)
+WHEN  (5) (1)
+WHEN  (6) (1)
+WHEN  (7) (1)
+WHEN  (8) (1)
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 8
+WHEN  (1) (0)
+WHEN  (2) (0)
+WHEN  (3) (0)
+WHEN  (4) (0)
+WHEN  (5) (0)
+WHEN  (6) (0)
+WHEN  (7) (0)
+WHEN  (8) (0)
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 8
+WHEN  (1) (0)
+WHEN  (2) (0)
+WHEN  (3) (0)
+WHEN  (4) (0)
+WHEN  (5) (0)
+WHEN  (6) (0)
+WHEN  (7) (0)
+WHEN  (8) (0)
+[ADDITION]
+NAME ABC BrowseViewButton
+[INSTANCE]
+INSTANCE 2
+PARENT 1
+[ADDITION]
+NAME ABC BrowseUpdateButtons
+[INSTANCE]
+INSTANCE 3
+PARENT 1
+PROCPROP
+[PROMPTS]
+%UpdateProcedure PROCEDURE  (UpdateFACTURA)
+%EditViaPopup LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC SortOrderDrop
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%SheetControl DEFAULT  ('?CurrentTab')
+%SheetHiden LONG  (0)
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 6
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Browse the FACTURA file'),AT(,,358,208),IMM,RESIZE,GRAY,MDI,HLP('ArchivoFACTURA'),FONT('MS Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,40,342,124),USE(?Browse:1),MSG('Administrador de FACTURA'),IMM,HVSCROLL,|
+      FORMAT('64R(2)|M~IDFACTURA~C(0)@n-14@64R(2)|M~IDSOCIO~C(0)@n-14@64R(2)|M~IDUSUARIO~C(0)@n-14@60D(12)|M~MONTOCOBERTURA~C(0)@n-10.2@48D(16)|M~INTERES~C(0)@n-10.2@48D(20)|M~TOTAL~C(0)@n-10.2@64R(2)|M~MES~C(0)@n-14@64R(2)|M~ANO~C(0)@n-14@48L(2)|M~PERIODO~L(2)@s11@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(FAC:IDFACTURA,FAC:IDSOCIO,FAC:IDUSUARIO,FAC:MONTOCOBERTURA,FAC:INTERES,FAC:TOTAL,FAC:MES,FAC:ANO,FAC:PERIODO)
+    BUTTON('&Ver'),AT(142,168,49,14),USE(?View:2),ICON('v.ico'),FLAT,CURSOR('mano.cur'),MSG('Visualizar'),TIP('Visualizar'),LEFT,#SEQ(2),#ORIG(?View)
+    BUTTON('&Agregar'),AT(195,168,49,14),USE(?Insert:3),ICON('a.ico'),FLAT,CURSOR('mano.cur'),MSG('Agrega Registro'),TIP('Agrega Registro'),LEFT,#SEQ(3),#ORIG(?Insert),#LINK(?Change:3)
+    BUTTON('&Cambiar'),AT(248,168,49,14),USE(?Change:3),ICON('c.ico'),FLAT,CURSOR('mano.cur'),MSG('Cambia Registro'),TIP('Cambia Registro'),LEFT,DEFAULT,#SEQ(3),#ORIG(?Change),#LINK(?Delete:3)
+    BUTTON('&Borrar'),AT(301,168,49,14),USE(?Delete:3),ICON('b.ico'),FLAT,CURSOR('mano.cur'),MSG('Borra Registro'),TIP('Borra Registro'),LEFT,#SEQ(3),#ORIG(?Delete),#LINK(?Insert:3)
+  SHEET,AT(4,4,350,182),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('PK_FACTURA'),USE(?Tab:2)
+    END
+    TAB('FK_FACTURA_SOCIO'),USE(?Tab:3)
+       BUTTON('Select SOCIOS'),MSG('Select Parent Field'),TIP('Selecciona'),USE(?SelectSOCIOS),AT(8,168,118,14)
+    END
+    TAB('FK_FACTURA_USUARIO'),USE(?Tab:4)
+       BUTTON('Select USUARIO'),MSG('Select Parent Field'),TIP('Selecciona'),USE(?SelectUSUARIO),AT(8,168,118,14)
+    END
+    TAB('IDX_FACTURA_ANO'),USE(?Tab:5)
+    END
+    TAB('IDX_FACTURA_ESTADO'),USE(?Tab:6)
+    END
+    TAB('IDX_FACTURA_FECHA'),USE(?Tab:7)
+    END
+    TAB('IDX_FACTURA_MES'),USE(?Tab:8)
+    END
+    TAB('IDX_FACTURA_PERIODO'),USE(?Tab:9)
+    END
+    TAB('IDX_FACTURA_TOTAL'),USE(?Tab:10)
+    END
+  END
+  BUTTON('&Salir'),AT(305,190,49,14),USE(?Close),ICON('salir.ico'),FLAT,CURSOR('mano.cur'),MSG('Salir'),TIP('Salir'),LEFT,#SEQ(4),#ORIG(?Close)
+  PROMPT('&Orden:'),AT(8,23),USE(?SortOrderList:Prompt),#SEQ(5),#ORIG(?SortOrderList:Prompt)
+  LIST,AT(48,23,75,10),USE(?SortOrderList),MSG('Select the Sort Order'),TIP('Select the Sort Order'),DROP(20),FROM(''),#SEQ(5),#ORIG(?SortOrderList)
+ END
+[PROCEDURE]
+NAME SelectSOCIOS
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'Select a SOCIOS Record'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+SOCIOS
+[INSTANCE]
+1
+[KEY]
+SOC:PK_SOCIOS
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (0)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22)
+%SortCondition DEPEND %SortOrder @S255 TIMES 22
+WHEN  (1) ('CHOICE(?CurrentTab) = 2')
+WHEN  (2) ('CHOICE(?CurrentTab) = 3')
+WHEN  (3) ('CHOICE(?CurrentTab) = 4')
+WHEN  (4) ('CHOICE(?CurrentTab) = 5')
+WHEN  (5) ('CHOICE(?CurrentTab) = 6')
+WHEN  (6) ('CHOICE(?CurrentTab) = 7')
+WHEN  (7) ('CHOICE(?CurrentTab) = 8')
+WHEN  (8) ('CHOICE(?CurrentTab) = 9')
+WHEN  (9) ('CHOICE(?CurrentTab) = 10')
+WHEN  (10) ('CHOICE(?CurrentTab) = 11')
+WHEN  (11) ('CHOICE(?CurrentTab) = 12')
+WHEN  (12) ('CHOICE(?CurrentTab) = 13')
+WHEN  (13) ('CHOICE(?CurrentTab) = 14')
+WHEN  (14) ('CHOICE(?CurrentTab) = 15')
+WHEN  (15) ('CHOICE(?CurrentTab) = 16')
+WHEN  (16) ('CHOICE(?CurrentTab) = 17')
+WHEN  (17) ('CHOICE(?CurrentTab) = 18')
+WHEN  (18) ('CHOICE(?CurrentTab) = 19')
+WHEN  (19) ('CHOICE(?CurrentTab) = 20')
+WHEN  (20) ('CHOICE(?CurrentTab) = 21')
+WHEN  (21) ('CHOICE(?CurrentTab) = 22')
+WHEN  (22) ('CHOICE(?CurrentTab) = 23')
+%SortKey DEPEND %SortOrder KEY TIMES 22
+WHEN  (1) (SOC:IDX_SOCIOS_DOCUMENTO)
+WHEN  (2) (SOC:IDX_SOCIOS_MATRICULA)
+WHEN  (3) (SOC:FK_SOCIOS_CIRCULO)
+WHEN  (4) (SOC:FK_SOCIOS_COBERTURA)
+WHEN  (5) (SOC:FK_SOCIOS_INSTITUCION)
+WHEN  (6) (SOC:FK_SOCIOS_LOCALIDAD)
+WHEN  (7) (SOC:FK_SOCIOS_TIPO_DOC)
+WHEN  (8) (SOC:FK_SOCIOS_USUARIO)
+WHEN  (9) (SOC:FK_SOCIOS_ZONA_VIVENDA)
+WHEN  (10) (SOC:IDX_SOCIOS_ACTA)
+WHEN  (11) (SOC:IDX_SOCIOS_BAJA)
+WHEN  (12) (SOC:IDX_SOCIOS_LIBRO)
+WHEN  (13) (SOC:IDX_SOCIOS_NOMBRE)
+WHEN  (14) (SOC:IDX_SOCIOS_N_VIEJO)
+WHEN  (15) (SOC:IDX_SOCIOS_PROVISORIO)
+WHEN  (16) (SOC:IDX_SOCIO_INGRESO)
+WHEN  (17) (SOC:FK_SOCIOS_TIPO_TITULO)
+WHEN  (18) (SOC:IDX_SOCIOS_MINISTERIO)
+WHEN  (19) (SOC:SOCIOS_CENTRO_SALUD)
+WHEN  (20) (SOC:IDX_SOCIOS_PROVEEDOR)
+WHEN  (21) (SOC:FK_SOCIOS_TIPO_IVA)
+WHEN  (22) (SOC:FK_SOCIOS_BANCO)
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 22
+WHEN  (1) ('Step')
+WHEN  (2) ('Step')
+WHEN  (3) ('Step')
+WHEN  (4) ('Step')
+WHEN  (5) ('Step')
+WHEN  (6) ('Step')
+WHEN  (7) ('Step')
+WHEN  (8) ('Step')
+WHEN  (9) ('Step')
+WHEN  (10) ('Step')
+WHEN  (11) ('Step')
+WHEN  (12) ('Step')
+WHEN  (13) ('Step')
+WHEN  (14) ('Step')
+WHEN  (15) ('Step')
+WHEN  (16) ('Step')
+WHEN  (17) ('Step')
+WHEN  (18) ('Step')
+WHEN  (19) ('Step')
+WHEN  (20) ('Step')
+WHEN  (21) ('Step')
+WHEN  (22) ('Step')
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 22
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+WHEN  (4) ('')
+WHEN  (5) ('')
+WHEN  (6) ('')
+WHEN  (7) ('')
+WHEN  (8) ('')
+WHEN  (9) ('')
+WHEN  (10) ('')
+WHEN  (11) ('')
+WHEN  (12) ('')
+WHEN  (13) ('')
+WHEN  (14) ('')
+WHEN  (15) ('')
+WHEN  (16) ('')
+WHEN  (17) ('')
+WHEN  (18) ('')
+WHEN  (19) ('')
+WHEN  (20) ('')
+WHEN  (21) ('')
+WHEN  (22) ('')
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 22
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+WHEN  (4) ('')
+WHEN  (5) ('')
+WHEN  (6) ('')
+WHEN  (7) ('')
+WHEN  (8) ('')
+WHEN  (9) ('')
+WHEN  (10) ('')
+WHEN  (11) ('')
+WHEN  (12) ('')
+WHEN  (13) ('')
+WHEN  (14) ('')
+WHEN  (15) ('')
+WHEN  (16) ('')
+WHEN  (17) ('')
+WHEN  (18) ('')
+WHEN  (19) ('')
+WHEN  (20) ('')
+WHEN  (21) ('')
+WHEN  (22) ('')
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 22
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+WHEN  (4) ('')
+WHEN  (5) ('')
+WHEN  (6) ('')
+WHEN  (7) ('')
+WHEN  (8) ('')
+WHEN  (9) ('')
+WHEN  (10) ('')
+WHEN  (11) ('')
+WHEN  (12) ('')
+WHEN  (13) ('')
+WHEN  (14) ('')
+WHEN  (15) ('')
+WHEN  (16) ('')
+WHEN  (17) ('')
+WHEN  (18) ('')
+WHEN  (19) ('')
+WHEN  (20) ('')
+WHEN  (21) ('')
+WHEN  (22) ('')
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 0 !HOLA 0
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 22
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+WHEN  (4) ()
+WHEN  (5) ()
+WHEN  (6) ()
+WHEN  (7) ()
+WHEN  (8) ()
+WHEN  (9) ()
+WHEN  (10) ()
+WHEN  (11) ()
+WHEN  (12) ()
+WHEN  (13) ()
+WHEN  (14) ()
+WHEN  (15) ()
+WHEN  (16) ()
+WHEN  (17) ()
+WHEN  (18) ()
+WHEN  (19) ()
+WHEN  (20) ()
+WHEN  (21) ()
+WHEN  (22) ()
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 22
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+WHEN  (4) ()
+WHEN  (5) ()
+WHEN  (6) ()
+WHEN  (7) ()
+WHEN  (8) ()
+WHEN  (9) ()
+WHEN  (10) ()
+WHEN  (11) ()
+WHEN  (12) ()
+WHEN  (13) ()
+WHEN  (14) ()
+WHEN  (15) ()
+WHEN  (16) ()
+WHEN  (17) ()
+WHEN  (18) ()
+WHEN  (19) ()
+WHEN  (20) ()
+WHEN  (21) ()
+WHEN  (22) ()
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 22
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+WHEN  (4) ()
+WHEN  (5) ()
+WHEN  (6) ()
+WHEN  (7) ()
+WHEN  (8) ()
+WHEN  (9) ()
+WHEN  (10) ()
+WHEN  (11) ()
+WHEN  (12) ()
+WHEN  (13) ()
+WHEN  (14) ()
+WHEN  (15) ()
+WHEN  (16) ()
+WHEN  (17) ()
+WHEN  (18) ()
+WHEN  (19) ()
+WHEN  (20) ()
+WHEN  (21) ()
+WHEN  (22) ()
+%SortRangeFile DEPEND %SortOrder FILE TIMES 22
+WHEN  (1) ()
+WHEN  (2) ()
+WHEN  (3) ()
+WHEN  (4) ()
+WHEN  (5) ()
+WHEN  (6) ()
+WHEN  (7) ()
+WHEN  (8) ()
+WHEN  (9) ()
+WHEN  (10) ()
+WHEN  (11) ()
+WHEN  (12) ()
+WHEN  (13) ()
+WHEN  (14) ()
+WHEN  (15) ()
+WHEN  (16) ()
+WHEN  (17) ()
+WHEN  (18) ()
+WHEN  (19) ()
+WHEN  (20) ()
+WHEN  (21) ()
+WHEN  (22) ()
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 22
+WHEN  (1) ('')
+WHEN  (2) ('')
+WHEN  (3) ('')
+WHEN  (4) ('')
+WHEN  (5) ('')
+WHEN  (6) ('')
+WHEN  (7) ('')
+WHEN  (8) ('')
+WHEN  (9) ('')
+WHEN  (10) ('')
+WHEN  (11) ('')
+WHEN  (12) ('')
+WHEN  (13) ('')
+WHEN  (14) ('')
+WHEN  (15) ('')
+WHEN  (16) ('')
+WHEN  (17) ('')
+WHEN  (18) ('')
+WHEN  (19) ('')
+WHEN  (20) ('')
+WHEN  (21) ('')
+WHEN  (22) ('')
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 22
+WHEN  (1) ('Fixed Thumb')
+WHEN  (2) ('Fixed Thumb')
+WHEN  (3) ('Fixed Thumb')
+WHEN  (4) ('Fixed Thumb')
+WHEN  (5) ('Fixed Thumb')
+WHEN  (6) ('Fixed Thumb')
+WHEN  (7) ('Fixed Thumb')
+WHEN  (8) ('Fixed Thumb')
+WHEN  (9) ('Fixed Thumb')
+WHEN  (10) ('Fixed Thumb')
+WHEN  (11) ('Fixed Thumb')
+WHEN  (12) ('Fixed Thumb')
+WHEN  (13) ('Fixed Thumb')
+WHEN  (14) ('Fixed Thumb')
+WHEN  (15) ('Fixed Thumb')
+WHEN  (16) ('Fixed Thumb')
+WHEN  (17) ('Fixed Thumb')
+WHEN  (18) ('Fixed Thumb')
+WHEN  (19) ('Fixed Thumb')
+WHEN  (20) ('Fixed Thumb')
+WHEN  (21) ('Fixed Thumb')
+WHEN  (22) ('Fixed Thumb')
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 22
+WHEN  (1) ('Runtime')
+WHEN  (2) ('Runtime')
+WHEN  (3) ('Runtime')
+WHEN  (4) ('Runtime')
+WHEN  (5) ('Runtime')
+WHEN  (6) ('Runtime')
+WHEN  (7) ('Runtime')
+WHEN  (8) ('Runtime')
+WHEN  (9) ('Runtime')
+WHEN  (10) ('Runtime')
+WHEN  (11) ('Runtime')
+WHEN  (12) ('Runtime')
+WHEN  (13) ('Runtime')
+WHEN  (14) ('Runtime')
+WHEN  (15) ('Runtime')
+WHEN  (16) ('Runtime')
+WHEN  (17) ('Runtime')
+WHEN  (18) ('Runtime')
+WHEN  (19) ('Runtime')
+WHEN  (20) ('Runtime')
+WHEN  (21) ('Runtime')
+WHEN  (22) ('Runtime')
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 22
+WHEN  (1)TIMES 0
+WHEN  (2)TIMES 0
+WHEN  (3)TIMES 0
+WHEN  (4)TIMES 0
+WHEN  (5)TIMES 0
+WHEN  (6)TIMES 0
+WHEN  (7)TIMES 0
+WHEN  (8)TIMES 0
+WHEN  (9)TIMES 0
+WHEN  (10)TIMES 0
+WHEN  (11)TIMES 0
+WHEN  (12)TIMES 0
+WHEN  (13)TIMES 0
+WHEN  (14)TIMES 0
+WHEN  (15)TIMES 0
+WHEN  (16)TIMES 0
+WHEN  (17)TIMES 0
+WHEN  (18)TIMES 0
+WHEN  (19)TIMES 0
+WHEN  (20)TIMES 0
+WHEN  (21)TIMES 0
+WHEN  (22)TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 22
+WHEN  (1) (1)
+WHEN  (2) (1)
+WHEN  (3) (1)
+WHEN  (4) (1)
+WHEN  (5) (1)
+WHEN  (6) (1)
+WHEN  (7) (1)
+WHEN  (8) (1)
+WHEN  (9) (1)
+WHEN  (10) (1)
+WHEN  (11) (1)
+WHEN  (12) (1)
+WHEN  (13) (1)
+WHEN  (14) (1)
+WHEN  (15) (1)
+WHEN  (16) (1)
+WHEN  (17) (1)
+WHEN  (18) (1)
+WHEN  (19) (1)
+WHEN  (20) (1)
+WHEN  (21) (1)
+WHEN  (22) (1)
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 22
+WHEN  (1) (0)
+WHEN  (2) (0)
+WHEN  (3) (0)
+WHEN  (4) (0)
+WHEN  (5) (0)
+WHEN  (6) (0)
+WHEN  (7) (0)
+WHEN  (8) (0)
+WHEN  (9) (0)
+WHEN  (10) (0)
+WHEN  (11) (0)
+WHEN  (12) (0)
+WHEN  (13) (0)
+WHEN  (14) (0)
+WHEN  (15) (0)
+WHEN  (16) (0)
+WHEN  (17) (0)
+WHEN  (18) (0)
+WHEN  (19) (0)
+WHEN  (20) (0)
+WHEN  (21) (0)
+WHEN  (22) (0)
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 22
+WHEN  (1) (0)
+WHEN  (2) (0)
+WHEN  (3) (0)
+WHEN  (4) (0)
+WHEN  (5) (0)
+WHEN  (6) (0)
+WHEN  (7) (0)
+WHEN  (8) (0)
+WHEN  (9) (0)
+WHEN  (10) (0)
+WHEN  (11) (0)
+WHEN  (12) (0)
+WHEN  (13) (0)
+WHEN  (14) (0)
+WHEN  (15) (0)
+WHEN  (16) (0)
+WHEN  (17) (0)
+WHEN  (18) (0)
+WHEN  (19) (0)
+WHEN  (20) (0)
+WHEN  (21) (0)
+WHEN  (22) (0)
+[ADDITION]
+NAME ABC BrowseSelectButton
+[INSTANCE]
+INSTANCE 2
+PARENT 1
+[PROMPTS]
+%HideIfDisabled LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC SortOrderDrop
+[INSTANCE]
+INSTANCE 4
+[PROMPTS]
+%SheetControl DEFAULT  ('?CurrentTab')
+%SheetHiden LONG  (0)
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Select a SOCIOS Record'),AT(,,358,258),IMM,RESIZE,GRAY,MDI,HLP('SelectSOCIOS'),FONT('MS Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,90,342,124),USE(?Browse:1),MSG('Administrador de SOCIOS'),IMM,HVSCROLL,|
+      FORMAT('64R(2)|M~IDSOCIO~C(0)@n-14@40R(2)|M~MATRICULA~C(0)@n-5@64R(2)|M~IDZONA~C(0)@n-14@64R(2)|M~IDCOBERTURA~C(0)@n-14@64R(2)|M~IDLOCALIDAD~C(0)@n-14@64R(2)|M~IDUSUARIO~C(0)@n-14@80L(2)|M~NOMBRE~L(2)@s100@64R(2)|M~N DOCUMENTO~C(0)@n-14@80L(2)|M~DIRECCION~L(2)@s100@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(SOC:IDSOCIO,SOC:MATRICULA,SOC:IDZONA,SOC:IDCOBERTURA,SOC:IDLOCALIDAD,SOC:IDUSUARIO,SOC:NOMBRE,SOC:N_DOCUMENTO,SOC:DIRECCION)
+    BUTTON('&Elegir'),AT(301,218,49,14),USE(?Select:2),ICON('e.ico'),FLAT,CURSOR('mano.cur'),MSG('Seleccionar'),TIP('Seleccionar'),LEFT,#SEQ(2),#ORIG(?Select)
+  SHEET,AT(4,4,350,232),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('PK_SOCIOS'),USE(?Tab:2)
+    END
+    TAB('IDX_SOCIOS_DOCUMENTO'),USE(?Tab:3)
+    END
+    TAB('IDX_SOCIOS_MATRICULA'),USE(?Tab:4)
+    END
+    TAB('FK_SOCIOS_CIRCULO'),USE(?Tab:5)
+    END
+    TAB('FK_SOCIOS_COBERTURA'),USE(?Tab:6)
+    END
+    TAB('FK_SOCIOS_INSTITUCION'),USE(?Tab:7)
+    END
+    TAB('FK_SOCIOS_LOCALIDAD'),USE(?Tab:8)
+    END
+    TAB('FK_SOCIOS_TIPO_DOC'),USE(?Tab:9)
+    END
+    TAB('FK_SOCIOS_USUARIO'),USE(?Tab:10)
+    END
+    TAB('FK_SOCIOS_ZONA_VIVENDA'),USE(?Tab:11)
+    END
+    TAB('IDX_SOCIOS_ACTA'),USE(?Tab:12)
+    END
+    TAB('IDX_SOCIOS_BAJA'),USE(?Tab:13)
+    END
+    TAB('IDX_SOCIOS_LIBRO'),USE(?Tab:14)
+    END
+    TAB('IDX_SOCIOS_NOMBRE'),USE(?Tab:15)
+    END
+    TAB('IDX_SOCIOS_N_VIEJO'),USE(?Tab:16)
+    END
+    TAB('IDX_SOCIOS_PROVISORIO'),USE(?Tab:17)
+    END
+    TAB('IDX_SOCIO_INGRESO'),USE(?Tab:18)
+    END
+    TAB('FK_SOCIOS_TIPO_TITULO'),USE(?Tab:19)
+    END
+    TAB('IDX_SOCIOS_MINISTERIO'),USE(?Tab:20)
+    END
+    TAB('SOCIOS_CENTRO_SALUD'),USE(?Tab:21)
+    END
+    TAB('IDX_SOCIOS_PROVEEDOR'),USE(?Tab:22)
+    END
+    TAB('FK_SOCIOS_TIPO_IVA'),USE(?Tab:23)
+    END
+    TAB('FK_SOCIOS_BANCO'),USE(?Tab:24)
+    END
+  END
+  BUTTON('&Salir'),AT(305,240,49,14),USE(?Close),ICON('salir.ico'),FLAT,CURSOR('mano.cur'),MSG('Salir'),TIP('Salir'),LEFT,#SEQ(3),#ORIG(?Close)
+  PROMPT('&Orden:'),AT(8,73),USE(?SortOrderList:Prompt),#SEQ(4),#ORIG(?SortOrderList:Prompt)
+  LIST,AT(48,73,75,10),USE(?SortOrderList),MSG('Select the Sort Order'),TIP('Select the Sort Order'),DROP(20),FROM(''),#SEQ(4),#ORIG(?SortOrderList)
+ END
+[PROCEDURE]
+NAME SelectUSUARIO
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'Select a USUARIO Record'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+USUARIO
+[INSTANCE]
+1
+[KEY]
+USU:PK_USUARIO
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (0)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  (1)
+%SortCondition DEPEND %SortOrder @S255 TIMES 1
+WHEN  (1) ('CHOICE(?CurrentTab) = 2')
+%SortKey DEPEND %SortOrder KEY TIMES 1
+WHEN  (1) (USU:USUARIO_IDX1)
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('Step')
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 1
+WHEN  (1) ('')
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 0 !HOLA 0
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeFile DEPEND %SortOrder FILE TIMES 1
+WHEN  (1) ()
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('Fixed Thumb')
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 1
+WHEN  (1) ('Runtime')
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 1
+WHEN  (1)TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (1)
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (0)
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (0)
+[ADDITION]
+NAME ABC BrowseSelectButton
+[INSTANCE]
+INSTANCE 2
+PARENT 1
+[PROMPTS]
+%HideIfDisabled LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC SortOrderDrop
+[INSTANCE]
+INSTANCE 4
+[PROMPTS]
+%SheetControl DEFAULT  ('?CurrentTab')
+%SheetHiden LONG  (0)
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Select a USUARIO Record'),AT(,,340,198),IMM,RESIZE,GRAY,MDI,HLP('SelectUSUARIO'),FONT('MS Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,30,324,124),USE(?Browse:1),MSG('Administrador de USUARIO'),IMM,HVSCROLL,|
+      FORMAT('64R(2)|M~IDUSUARIO~C(0)@n-14@80L(2)|M~DESCRIPCION~L(2)@s20@44L(2)|M~CONTRASENA~L(2)@s10@64R(2)|M~NIVEL~C(0)@n-14@80R(2)|M~BAJA~C(0)@d17@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(USU:IDUSUARIO,USU:DESCRIPCION,USU:CONTRASENA,USU:NIVEL,USU:BAJA)
+    BUTTON('&Elegir'),AT(283,158,49,14),USE(?Select:2),ICON('e.ico'),FLAT,CURSOR('mano.cur'),MSG('Seleccionar'),TIP('Seleccionar'),LEFT,#SEQ(2),#ORIG(?Select)
+  SHEET,AT(4,4,332,172),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('PK_USUARIO'),USE(?Tab:2)
+    END
+    TAB('USUARIO_IDX1'),USE(?Tab:3)
+    END
+  END
+  BUTTON('&Salir'),AT(287,180,49,14),USE(?Close),ICON('salir.ico'),FLAT,CURSOR('mano.cur'),MSG('Salir'),TIP('Salir'),LEFT,#SEQ(3),#ORIG(?Close)
+  PROMPT('&Orden:'),AT(8,13),USE(?SortOrderList:Prompt),#SEQ(4),#ORIG(?SortOrderList:Prompt)
+  LIST,AT(48,13,75,10),USE(?SortOrderList),MSG('Select the Sort Order'),TIP('Select the Sort Order'),DROP(20),FROM(''),#SEQ(4),#ORIG(?SortOrderList)
+ END
+[PROCEDURE]
+NAME UpdateFACTURA
+CATEGORY 'Form'
+[COMMON]
+DESCRIPTION 'Actualizacion FACTURA'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+FACTURA
+[INSTANCE]
+2
+[OTHERS]
+SOCIOS
+USUARIO
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 2
+WHEN  ('?FAC:IDSOCIO') ()
+WHEN  ('?FAC:IDUSUARIO') ()
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 2
+WHEN  ('?FAC:IDSOCIO') ()
+WHEN  ('?FAC:IDUSUARIO') ()
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 2
+WHEN  ('?FAC:IDSOCIO') ()
+WHEN  ('?FAC:IDUSUARIO') ()
+
+%PostLookupKey DEPEND %Control KEY TIMES 2
+WHEN  ('?FAC:IDSOCIO') (SOC:PK_SOCIOS)
+WHEN  ('?FAC:IDUSUARIO') (USU:PK_USUARIO)
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 2
+WHEN  ('?FAC:IDSOCIO') (SOC:IDSOCIO)
+WHEN  ('?FAC:IDUSUARIO') (USU:IDUSUARIO)
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 2
+WHEN  ('?FAC:IDSOCIO') (SelectSOCIOS)
+WHEN  ('?FAC:IDUSUARIO') (SelectUSUARIO)
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 2
+WHEN  ('?FAC:IDSOCIO') ()
+WHEN  ('?FAC:IDUSUARIO') ()
+[ADDITION]
+NAME ABC RecordValidation
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%ValidateOnAccept LONG  (1)
+%ValidateOnNonStopSelect LONG  (1)
+%ControlsExcluded MULTI LONG  ()
+%ControlToExclude DEPEND %ControlsExcluded STRING TIMES 0
+[ADDITION]
+NAME ABC SaveButton
+[INSTANCE]
+INSTANCE 2
+PROCPROP
+[PROMPTS]
+%InsertAllowed LONG  (1)
+%InsertMessage @S40  ('Insertando Registro')
+%ChangeAllowed LONG  (1)
+%ChangeMessage @S40  ('Cambiando Registro')
+%DeleteAllowed LONG  (1)
+%DeleteMessage @S40  ('Borrando Registro')
+%ViewMessage @S40  ('Visualizando Registro')
+%MessageHeader LONG  (0)
+%ActionOnDelete STRING  ('Standard Warning')
+%PrimingFields MULTI LONG  ()
+%PrimedField DEPEND %PrimingFields FIELD TIMES 0
+
+%PrimedValue DEPEND %PrimingFields @S255 TIMES 0
+
+%ActionOnCancel STRING  ('Confirm cancel')
+%MessageLocation STRING  ('Title Bar')
+%MessageStatusSection @n1  (0)
+
+%HistoryKey        DEFAULT (CtrlH)
+
+%AppendToTitle LONG  ()
+%AppendToTitleID @S255  ('')
+[ADDITION]
+NAME ABC CancelButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC ViewFormActions
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Actualizacion FACTURA'),AT(,,200,182),RESIZE,IMM,GRAY,MDI,HLP('UpdateFACTURA'),FONT('MS Sans Serif',8,,400,1),CENTER,SYSTEM
+  SHEET,AT(4,4,192,156),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('General'),USE(?Tab:1)
+         PROMPT('IDFACTURA:'),USE(?FAC:IDFACTURA:Prompt),TRN,AT(8,20),#ORIG(?FAC:IDFACTURA:Prompt),#LINK(FAC:IDFACTURA)
+         ENTRY(@n-14),USE(FAC:IDFACTURA),RIGHT(1),AT(88,20,64,10),#ORIG(FAC:IDFACTURA),#LINK(?FAC:IDFACTURA:Prompt)
+         PROMPT('IDSOCIO:'),USE(?FAC:IDSOCIO:Prompt),TRN,AT(8,34),#ORIG(?FAC:IDSOCIO:Prompt),#LINK(FAC:IDSOCIO)
+         ENTRY(@n-14),USE(FAC:IDSOCIO),RIGHT(1),AT(88,34,64,10),#ORIG(FAC:IDSOCIO),#LINK(?FAC:IDSOCIO:Prompt)
+         PROMPT('IDUSUARIO:'),USE(?FAC:IDUSUARIO:Prompt),TRN,AT(8,48),#ORIG(?FAC:IDUSUARIO:Prompt),#LINK(FAC:IDUSUARIO)
+         ENTRY(@n-14),USE(FAC:IDUSUARIO),RIGHT(1),AT(88,48,64,10),#ORIG(FAC:IDUSUARIO),#LINK(?FAC:IDUSUARIO:Prompt)
+         PROMPT('MONTOCOBERTURA:'),USE(?FAC:MONTOCOBERTURA:Prompt),TRN,AT(8,62),#ORIG(?FAC:MONTOCOBERTURA:Prompt),#LINK(FAC:MONTOCOBERTURA)
+         ENTRY(@n-10.2),USE(FAC:MONTOCOBERTURA),DECIMAL(12),AT(88,62,48,10),#ORIG(FAC:MONTOCOBERTURA),#LINK(?FAC:MONTOCOBERTURA:Prompt)
+         PROMPT('INTERES:'),USE(?FAC:INTERES:Prompt),TRN,AT(8,76),#ORIG(?FAC:INTERES:Prompt),#LINK(FAC:INTERES)
+         ENTRY(@n-10.2),USE(FAC:INTERES),DECIMAL(12),AT(88,76,48,10),#ORIG(FAC:INTERES),#LINK(?FAC:INTERES:Prompt)
+         PROMPT('TOTAL:'),USE(?FAC:TOTAL:Prompt),TRN,AT(8,90),#ORIG(?FAC:TOTAL:Prompt),#LINK(FAC:TOTAL)
+         ENTRY(@n-10.2),USE(FAC:TOTAL),DECIMAL(12),AT(88,90,48,10),#ORIG(FAC:TOTAL),#LINK(?FAC:TOTAL:Prompt)
+         PROMPT('MES:'),USE(?FAC:MES:Prompt),TRN,AT(8,104),#ORIG(?FAC:MES:Prompt),#LINK(FAC:MES)
+         ENTRY(@n-14),USE(FAC:MES),RIGHT(1),AT(88,104,64,10),#ORIG(FAC:MES),#LINK(?FAC:MES:Prompt)
+         PROMPT('ANO:'),USE(?FAC:ANO:Prompt),TRN,AT(8,118),#ORIG(?FAC:ANO:Prompt),#LINK(FAC:ANO)
+         ENTRY(@n-14),USE(FAC:ANO),RIGHT(1),AT(88,118,64,10),#ORIG(FAC:ANO),#LINK(?FAC:ANO:Prompt)
+         PROMPT('PERIODO:'),USE(?FAC:PERIODO:Prompt),TRN,AT(8,132),#ORIG(?FAC:PERIODO:Prompt),#LINK(FAC:PERIODO)
+         ENTRY(@s11),USE(FAC:PERIODO),AT(88,132,48,10),#ORIG(FAC:PERIODO),#LINK(?FAC:PERIODO:Prompt)
+         PROMPT('FECHA:'),USE(?FAC:FECHA:Prompt),TRN,AT(8,146),#ORIG(?FAC:FECHA:Prompt),#LINK(FAC:FECHA)
+         ENTRY(@d17),USE(FAC:FECHA),RIGHT(1),AT(88,146,104,10),#ORIG(FAC:FECHA),#LINK(?FAC:FECHA:Prompt)
+    END
+    TAB('General (cont.)'),USE(?Tab:2)
+         PROMPT('HORA:'),USE(?FAC:HORA:Prompt),TRN,AT(8,20),#ORIG(?FAC:HORA:Prompt),#LINK(FAC:HORA)
+         ENTRY(@t7),USE(FAC:HORA),RIGHT(1),AT(88,20,104,10),#ORIG(FAC:HORA),#LINK(?FAC:HORA:Prompt)
+         PROMPT('ESTADO:'),USE(?FAC:ESTADO:Prompt),TRN,AT(8,34),#ORIG(?FAC:ESTADO:Prompt),#LINK(FAC:ESTADO)
+         ENTRY(@s21),USE(FAC:ESTADO),AT(88,34,88,10),#ORIG(FAC:ESTADO),#LINK(?FAC:ESTADO:Prompt)
+         PROMPT('DESCUENTOCOBERTURA:'),USE(?FAC:DESCUENTOCOBERTURA:Prompt),TRN,AT(8,48),#ORIG(?FAC:DESCUENTOCOBERTURA:Prompt),#LINK(FAC:DESCUENTOCOBERTURA)
+         ENTRY(@n-10.2),USE(FAC:DESCUENTOCOBERTURA),DECIMAL(12),AT(88,48,48,10),#ORIG(FAC:DESCUENTOCOBERTURA),#LINK(?FAC:DESCUENTOCOBERTURA:Prompt)
+         PROMPT('DESCUENTOESPECIAL:'),USE(?FAC:DESCUENTOESPECIAL:Prompt),TRN,AT(8,62),#ORIG(?FAC:DESCUENTOESPECIAL:Prompt),#LINK(FAC:DESCUENTOESPECIAL)
+         ENTRY(@n-10.2),USE(FAC:DESCUENTOESPECIAL),DECIMAL(12),AT(88,62,48,10),#ORIG(FAC:DESCUENTOESPECIAL),#LINK(?FAC:DESCUENTOESPECIAL:Prompt)
+         PROMPT('IDPAGO:'),USE(?FAC:IDPAGO:Prompt),TRN,AT(8,76),#ORIG(?FAC:IDPAGO:Prompt),#LINK(FAC:IDPAGO)
+         ENTRY(@n-14),USE(FAC:IDPAGO),RIGHT(1),AT(88,76,64,10),#ORIG(FAC:IDPAGO),#LINK(?FAC:IDPAGO:Prompt)
+         PROMPT('IDPAGO LIQ:'),USE(?FAC:IDPAGO_LIQ:Prompt),TRN,AT(8,90),#ORIG(?FAC:IDPAGO_LIQ:Prompt),#LINK(FAC:IDPAGO_LIQ)
+         ENTRY(@n-14),USE(FAC:IDPAGO_LIQ),RIGHT(1),AT(88,90,64,10),#ORIG(FAC:IDPAGO_LIQ),#LINK(?FAC:IDPAGO_LIQ:Prompt)
+    END
+  END
+  BUTTON('&Aceptar'),AT(94,164,49,14),USE(?OK),ICON('ok.ico'),FLAT,CURSOR('mano.cur'),MSG('Confirma y Actualiza el Formulario'),TIP('Confirma y Actualiza el Formulario'),LEFT,DEFAULT,#SEQ(2),#ORIG(?OK)
+  BUTTON('&Cancelar'),AT(147,164,49,14),USE(?Cancel),ICON('cancelar.ico'),FLAT,CURSOR('mano.cur'),MSG('Cancela Operacion'),TIP('Cancela Operacion'),LEFT,#SEQ(3),#ORIG(?Cancel)
+ END
